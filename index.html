@@ -6,25 +6,20 @@
   <meta name="description" content="Escritório de advocacia especializado em direito civil, trabalhista e empresarial. Atendimento personalizado com excelência jurídica e comprometimento com seus resultados." />
   <meta name="keywords" content="advocacia, advogado, escritório de advocacia, direito civil, direito trabalhista, direito empresarial, consultoria jurídica" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Zezinho Goiano Advocacia | Excelência Jurídica" />
+  <meta property="og:title" content="ZG Advocacia | Excelência Jurídica" />
   <meta property="og:description" content="Escritório de advocacia com tradição, ética e comprometimento com seus direitos." />
   <meta property="og:type" content="website" />
-  <title>Zezinho Goiano Advocacia | Excelência Jurídica</title>
+  <title>ZG Advocacia | Excelência Jurídica</title>
 
-  <!-- Preconnect para performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-
-  <!-- Google Fonts: Cormorant Garamond + Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     /* ============================================================
-       RESET & VARIÁVEIS CSS
+       RESET RIGOROSO — evita repetição de conteúdo
     ============================================================ */
     *, *::before, *::after {
       margin: 0;
@@ -32,6 +27,32 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      width: 100%;
+      /* CRÍTICO: impede qualquer overflow horizontal/vertical fantasma */
+      overflow-x: hidden;
+      /* NÃO colocar overflow-y: hidden no body — quebra o scroll */
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-body);
+      background: #ffffff;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      /* Garante que o body termina no último filho */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ============================================================
+       VARIÁVEIS
+    ============================================================ */
     :root {
       --navy:        #1F3A5F;
       --navy-dark:   #152B47;
@@ -56,28 +77,13 @@
       --shadow-sm:   0 2px 8px rgba(0,0,0,.06);
       --shadow-md:   0 8px 32px rgba(0,0,0,.10);
       --shadow-lg:   0 20px 60px rgba(0,0,0,.14);
-      --shadow-gold: 0 4px 24px rgba(200,169,106,.25);
 
       --radius-sm:   4px;
       --radius-md:   8px;
       --radius-lg:   16px;
 
-      --transition:  all .35s cubic-bezier(.4,0,.2,1);
+      --transition:      all .35s cubic-bezier(.4,0,.2,1);
       --transition-fast: all .2s ease;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      color: var(--text-body);
-      background: var(--white);
-      line-height: 1.7;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
     }
 
     img { max-width: 100%; display: block; }
@@ -103,10 +109,12 @@
     }
 
     .gold-line--center {
-      margin: 1rem auto 1.5rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .section-label {
+      display: block;
       font-family: var(--font-sans);
       font-size: .72rem;
       font-weight: 600;
@@ -136,6 +144,7 @@
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: .6rem;
       padding: .9rem 2.2rem;
       border-radius: var(--radius-sm);
@@ -149,6 +158,7 @@
       transition: var(--transition);
       position: relative;
       overflow: hidden;
+      white-space: nowrap;
     }
 
     .btn::after {
@@ -179,7 +189,6 @@
       background: transparent;
       color: var(--white);
       border: 1.5px solid rgba(255,255,255,.45);
-      backdrop-filter: blur(4px);
     }
 
     .btn-outline:hover {
@@ -214,7 +223,7 @@
 
     #navbar.scrolled {
       padding: .85rem 0;
-      background: rgba(15, 27, 45, .88);
+      background: rgba(15, 27, 45, .92);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid rgba(200,169,106,.15);
@@ -227,11 +236,11 @@
       justify-content: space-between;
     }
 
-    /* Logo */
     .nav-logo {
       display: flex;
       align-items: center;
       gap: .85rem;
+      flex-shrink: 0;
     }
 
     .nav-logo-icon {
@@ -273,7 +282,6 @@
       color: var(--gold);
     }
 
-    /* Menu */
     .nav-menu {
       display: flex;
       align-items: center;
@@ -302,33 +310,29 @@
       transition: width .3s ease;
     }
 
-    .nav-link:hover {
-      color: var(--white);
-    }
-
+    .nav-link:hover { color: var(--white); }
     .nav-link:hover::after { width: 100%; }
 
     .nav-cta {
-      padding: .65rem 1.5rem;
+      padding: .65rem 1.5rem !important;
       background: transparent;
-      border: 1.5px solid var(--gold);
+      border: 1.5px solid var(--gold) !important;
       border-radius: var(--radius-sm);
       color: var(--gold) !important;
-      font-size: .78rem;
+      font-size: .78rem !important;
       font-weight: 600;
-      letter-spacing: .1em;
+      letter-spacing: .1em !important;
       text-transform: uppercase;
       transition: var(--transition);
     }
 
+    .nav-cta::after { display: none !important; }
+
     .nav-cta:hover {
-      background: var(--gold);
+      background: var(--gold) !important;
       color: var(--navy-deep) !important;
     }
 
-    .nav-cta::after { display: none; }
-
-    /* Hamburger */
     .nav-toggle {
       display: none;
       flex-direction: column;
@@ -337,6 +341,7 @@
       border: none;
       cursor: pointer;
       padding: .5rem;
+      z-index: 1001;
     }
 
     .nav-toggle span {
@@ -348,56 +353,91 @@
     }
 
     /* ============================================================
-       HERO — FULL SCREEN
+       HERO — CORREÇÕES CRÍTICAS
+       
+       PROBLEMA RAIZ DA REPETIÇÃO:
+       background-attachment: fixed causa bug em iOS e em alguns
+       navegadores que "repetem" o background além do elemento.
+       Solução: usar um <div> filho absoluto como fundo, sem
+       background-attachment: fixed no próprio section.
+       O parallax é feito via JS com translateY controlado,
+       nunca deixando o elemento sair do clip do pai.
     ============================================================ */
     #hero {
       position: relative;
       width: 100%;
       min-height: 100svh;
+      min-height: 100vh; /* fallback */
       display: flex;
       align-items: center;
+
+      /* CRÍTICO: clipar qualquer overflow do filho .hero-bg */
       overflow: hidden;
     }
 
-    /* Imagem de fundo via Unsplash (escritório/legal) */
     .hero-bg {
       position: absolute;
-      inset: 0;
+      /* Margem negativa para o parallax ter espaço sem vazar */
+      top: -8%;
+      left: 0;
+      right: 0;
+      /* altura extra para o parallax não revelar borda branca */
+      bottom: -8%;
+
       background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1920&q=85');
       background-size: cover;
       background-position: center 30%;
-      background-attachment: fixed;
-      transform: scale(1.04);
+      /* SEM background-attachment: fixed — era o causador da repetição */
+      will-change: transform;
       transition: transform 8s ease;
     }
 
-    #hero.loaded .hero-bg { transform: scale(1); }
+    #hero.loaded .hero-bg {
+      transform: scale(1);
+    }
 
-    /* Overlay em gradiente derivado das cores principais */
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(
-          105deg,
-          rgba(13, 30, 51, .92) 0%,
-          rgba(31, 58, 95, .80) 45%,
-          rgba(46, 46, 46, .65) 100%
-        );
+      background: linear-gradient(
+        105deg,
+        rgba(13, 30, 51, .93) 0%,
+        rgba(31, 58, 95, .82) 45%,
+        rgba(46, 46, 46, .68) 100%
+      );
+      /* z-index acima do hero-bg */
+      z-index: 1;
     }
 
-    /* Textura sutil */
     .hero-texture {
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: 2;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
-    .hero-content {
+    /* Container do hero: z-index acima de todos os pseudo-elementos */
+    .hero-content-wrap {
       position: relative;
-      z-index: 2;
-      max-width: 780px;
+      z-index: 3;
+      width: 100%;
+    }
+
+    /*
+      CORREÇÃO DOS BOTÕES DESCENTRALIZADOS:
+      O hero-content ficava com max-width sem margin auto,
+      então alinhava à esquerda no container.
+      Agora o layout é centralizado por padrão,
+      com alinhamento ao centro explícito.
+    */
+    .hero-content {
+      max-width: 860px;
+      margin: 0 auto;           /* centraliza horizontalmente */
       padding: 8rem 0 5rem;
+      text-align: center;       /* centraliza todo o texto e botões */
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* garante centralização dos filhos flex */
     }
 
     .hero-badge {
@@ -421,7 +461,7 @@
     }
 
     .hero-badge i {
-      font-size: .7rem;
+      font-size: .5rem;
       color: var(--gold);
     }
 
@@ -433,6 +473,7 @@
       line-height: 1.12;
       letter-spacing: -.01em;
       margin-bottom: 1.5rem;
+      /* herda text-align: center do pai */
     }
 
     .hero-title em {
@@ -441,38 +482,46 @@
     }
 
     .hero-subtitle {
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-size: clamp(1rem, 2vw, 1.18rem);
       color: rgba(255,255,255,.75);
       line-height: 1.8;
-      max-width: 580px;
+      max-width: 600px;
       margin-bottom: 2.8rem;
       font-weight: 300;
+      text-align: center;
     }
 
+    /* BOTÕES DO HERO — centralizados */
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+      justify-content: center;  /* centraliza os botões */
+      align-items: center;
       margin-bottom: 4rem;
+      width: 100%;
     }
 
     .hero-divider {
-      width: 100%;
+      width: min(480px, 100%);
       height: 1px;
-      background: linear-gradient(90deg, rgba(200,169,106,.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(200,169,106,.4), transparent);
       margin-bottom: 2.5rem;
     }
 
-    /* Estatísticas rápidas no hero */
+    /* Estatísticas */
     .hero-stats {
       display: flex;
-      gap: 3rem;
+      gap: 3.5rem;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .hero-stat {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .hero-stat-number {
@@ -483,17 +532,15 @@
       line-height: 1;
     }
 
-    .hero-stat-number span {
-      color: var(--gold);
-    }
+    .hero-stat-number span { color: var(--gold); }
 
     .hero-stat-label {
-      font-size: .75rem;
+      font-size: .73rem;
       font-weight: 500;
       letter-spacing: .1em;
       text-transform: uppercase;
       color: rgba(255,255,255,.5);
-      margin-top: .3rem;
+      margin-top: .35rem;
     }
 
     /* Scroll indicator */
@@ -502,7 +549,7 @@
       bottom: 2.5rem;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 2;
+      z-index: 4;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -560,7 +607,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 3rem;
+      gap: 2.5rem;
       flex-wrap: wrap;
     }
 
@@ -571,22 +618,20 @@
       color: rgba(255,255,255,.6);
       font-size: .8rem;
       font-weight: 500;
-      letter-spacing: .06em;
+      letter-spacing: .04em;
     }
 
-    .trust-item i {
-      color: var(--gold);
-      font-size: .9rem;
-    }
+    .trust-item i { color: var(--gold); font-size: .9rem; }
 
     .trust-sep {
       width: 1px;
       height: 18px;
       background: rgba(255,255,255,.12);
+      flex-shrink: 0;
     }
 
     /* ============================================================
-       SOBRE — SEÇÃO
+       SOBRE
     ============================================================ */
     #sobre {
       padding: 9rem 0;
@@ -601,7 +646,7 @@
       right: 0;
       width: 420px;
       height: 420px;
-      background: radial-gradient(circle, rgba(200,169,106,.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(200,169,106,.055) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -612,9 +657,7 @@
       align-items: center;
     }
 
-    .sobre-visual {
-      position: relative;
-    }
+    .sobre-visual { position: relative; }
 
     .sobre-img-wrap {
       position: relative;
@@ -631,11 +674,8 @@
       transition: transform .5s ease;
     }
 
-    .sobre-img-wrap:hover img {
-      transform: scale(1.03);
-    }
+    .sobre-img-wrap:hover img { transform: scale(1.03); }
 
-    /* Cartão flutuante */
     .sobre-card-float {
       position: absolute;
       bottom: -2rem;
@@ -655,9 +695,7 @@
       line-height: 1;
     }
 
-    .sobre-card-float-number span {
-      color: var(--gold);
-    }
+    .sobre-card-float-number span { color: var(--gold); }
 
     .sobre-card-float-label {
       font-size: .75rem;
@@ -675,10 +713,6 @@
       height: 80px;
       background: linear-gradient(to bottom, var(--gold), transparent);
       border-radius: 2px;
-    }
-
-    .sobre-text .section-subtitle {
-      margin-bottom: 2.5rem;
     }
 
     .sobre-valores {
@@ -730,18 +764,16 @@
       padding: 9rem 0;
       background: var(--off-white);
       position: relative;
-      overflow: hidden;
     }
 
-    #areas::before {
+    #areas::after {
       content: '';
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: .3;
+      background: linear-gradient(90deg, transparent, rgba(200,169,106,.3), transparent);
     }
 
     .areas-header {
@@ -763,7 +795,6 @@
       transition: var(--transition);
       position: relative;
       overflow: hidden;
-      cursor: default;
     }
 
     .area-card::before {
@@ -785,9 +816,7 @@
       border-color: transparent;
     }
 
-    .area-card:hover::before {
-      transform: scaleX(1);
-    }
+    .area-card:hover::before { transform: scaleX(1); }
 
     .area-card-icon {
       width: 56px;
@@ -816,7 +845,6 @@
       font-weight: 600;
       color: var(--navy);
       margin-bottom: .9rem;
-      line-height: 1.3;
     }
 
     .area-card p {
@@ -838,21 +866,13 @@
       transition: var(--transition-fast);
     }
 
-    .area-card-link i {
-      font-size: .7rem;
-      transition: transform .2s;
-    }
+    .area-card-link i { font-size: .7rem; transition: transform .2s; }
 
-    .area-card:hover .area-card-link {
-      color: var(--gold-dark);
-    }
-
-    .area-card:hover .area-card-link i {
-      transform: translateX(4px);
-    }
+    .area-card:hover .area-card-link { color: var(--gold-dark); }
+    .area-card:hover .area-card-link i { transform: translateX(4px); }
 
     /* ============================================================
-       DIFERENCIAIS / POR QUE NÓS
+       DIFERENCIAIS
     ============================================================ */
     #diferenciais {
       padding: 9rem 0;
@@ -877,10 +897,7 @@
       margin-bottom: 5rem;
     }
 
-    .diferenciais-header .section-title {
-      color: var(--white);
-    }
-
+    .diferenciais-header .section-title { color: var(--white); }
     .diferenciais-header .section-subtitle {
       color: rgba(255,255,255,.55);
       margin: 0 auto;
@@ -954,7 +971,7 @@
     }
 
     /* ============================================================
-       NÚMEROS / ESTATÍSTICAS
+       NÚMEROS
     ============================================================ */
     #numeros {
       padding: 7rem 0;
@@ -996,9 +1013,7 @@
       margin-bottom: .5rem;
     }
 
-    .numero-value span {
-      color: var(--gold);
-    }
+    .numero-value span { color: var(--gold); }
 
     .numero-label {
       font-size: .8rem;
@@ -1033,7 +1048,6 @@
       padding: 2.5rem;
       border: 1px solid var(--gray-200);
       transition: var(--transition);
-      position: relative;
     }
 
     .depoimento-card:hover {
@@ -1056,10 +1070,7 @@
       margin-bottom: 1.2rem;
     }
 
-    .depoimento-stars i {
-      color: var(--gold);
-      font-size: .8rem;
-    }
+    .depoimento-stars i { color: var(--gold); font-size: .8rem; }
 
     .depoimento-text {
       font-size: .93rem;
@@ -1081,9 +1092,8 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--gold);
       background: var(--navy);
+      border: 2px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1091,7 +1101,7 @@
       font-family: var(--font-serif);
       font-size: 1rem;
       font-weight: 600;
-      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .depoimento-author-info h4 {
@@ -1104,7 +1114,6 @@
     .depoimento-author-info span {
       font-size: .78rem;
       color: var(--gray-400);
-      letter-spacing: .05em;
     }
 
     /* ============================================================
@@ -1126,10 +1135,7 @@
       gap: 2.5rem;
     }
 
-    .equipe-card {
-      text-align: center;
-      transition: var(--transition);
-    }
+    .equipe-card { text-align: center; transition: var(--transition); }
 
     .equipe-img-wrap {
       position: relative;
@@ -1165,10 +1171,7 @@
 
     .equipe-card:hover .equipe-overlay { opacity: 1; }
 
-    .equipe-social {
-      display: flex;
-      gap: .6rem;
-    }
+    .equipe-social { display: flex; gap: .6rem; }
 
     .equipe-social a {
       width: 34px;
@@ -1214,12 +1217,11 @@
     }
 
     /* ============================================================
-       CTA SECTION
+       CTA
     ============================================================ */
     #cta {
       padding: 8rem 0;
-      background:
-        linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 50%, var(--charcoal) 100%);
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 50%, var(--charcoal) 100%);
       position: relative;
       overflow: hidden;
       text-align: center;
@@ -1229,7 +1231,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
     .cta-glow {
@@ -1243,13 +1245,7 @@
       pointer-events: none;
     }
 
-    .cta-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-content .section-label { margin-bottom: 1rem; }
-
+    .cta-content { position: relative; z-index: 1; }
     .cta-content .section-title {
       color: var(--white);
       margin-bottom: 1.2rem;
@@ -1275,10 +1271,7 @@
       letter-spacing: .06em;
     }
 
-    .cta-note i {
-      color: var(--gold);
-      margin-right: .3rem;
-    }
+    .cta-note i { color: var(--gold); margin-right: .3rem; }
 
     /* ============================================================
        CONTATO
@@ -1295,14 +1288,11 @@
       align-items: start;
     }
 
-    .contato-info .section-subtitle {
-      margin-bottom: 3rem;
-    }
-
     .contato-items {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      margin-top: 2rem;
     }
 
     .contato-item {
@@ -1334,7 +1324,8 @@
       margin-bottom: .2rem;
     }
 
-    .contato-item p, .contato-item a {
+    .contato-item p,
+    .contato-item a {
       font-size: .93rem;
       color: var(--text-body);
       line-height: 1.6;
@@ -1343,7 +1334,6 @@
 
     .contato-item a:hover { color: var(--navy); }
 
-    /* Formulário */
     .contato-form {
       background: var(--off-white);
       border-radius: var(--radius-lg);
@@ -1403,9 +1393,7 @@
     }
 
     .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--gray-400);
-    }
+    .form-group textarea::placeholder { color: var(--gray-400); }
 
     .form-group input:focus,
     .form-group select:focus,
@@ -1414,10 +1402,7 @@
       box-shadow: 0 0 0 3px rgba(31,58,95,.08);
     }
 
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
 
     .form-submit {
       width: 100%;
@@ -1433,17 +1418,45 @@
       color: var(--gray-400);
     }
 
-    .form-privacy i {
-      color: var(--gold);
-      margin-right: .3rem;
-    }
+    .form-privacy i { color: var(--gold); margin-right: .3rem; }
 
     /* ============================================================
-       RODAPÉ
+       RODAPÉ — position garante que é o ÚLTIMO elemento
     ============================================================ */
     #footer {
       background: var(--navy-deep);
       color: var(--white);
+      /* Empurra o footer para o fim do flex body */
+      margin-top: auto;
+    }
+
+    .footer-awards {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .footer-awards-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-award {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: rgba(255,255,255,.3);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+    }
+
+    .footer-award i {
+      font-size: 1.2rem;
+      color: var(--gold);
+      opacity: .6;
     }
 
     .footer-top {
@@ -1457,7 +1470,6 @@
       gap: 4rem;
     }
 
-    /* Logo Footer */
     .footer-brand {
       display: flex;
       align-items: center;
@@ -1475,6 +1487,7 @@
       justify-content: center;
       color: var(--gold);
       font-size: 1rem;
+      flex-shrink: 0;
     }
 
     .footer-logo-name {
@@ -1554,16 +1567,11 @@
       background: var(--gold);
       opacity: .5;
       transition: opacity .2s, width .2s;
+      flex-shrink: 0;
     }
 
-    .footer-links a:hover {
-      color: var(--white);
-    }
-
-    .footer-links a:hover::before {
-      opacity: 1;
-      width: 18px;
-    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-links a:hover::before { opacity: 1; width: 18px; }
 
     .footer-contact-list {
       display: flex;
@@ -1586,40 +1594,7 @@
       flex-shrink: 0;
     }
 
-    /* Barra de certificações */
-    .footer-awards {
-      padding: 2rem 0;
-      border-bottom: 1px solid rgba(255,255,255,.07);
-    }
-
-    .footer-awards-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-award {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      color: rgba(255,255,255,.3);
-      font-size: .8rem;
-      font-weight: 500;
-      letter-spacing: .06em;
-    }
-
-    .footer-award i {
-      font-size: 1.2rem;
-      color: var(--gold);
-      opacity: .6;
-    }
-
-    /* Rodapé inferior */
-    .footer-bottom {
-      padding: 1.8rem 0;
-    }
+    .footer-bottom { padding: 1.8rem 0; }
 
     .footer-bottom-inner {
       display: flex;
@@ -1641,10 +1616,7 @@
 
     .footer-bottom a:hover { color: var(--gold); }
 
-    .footer-bottom-links {
-      display: flex;
-      gap: 2rem;
-    }
+    .footer-bottom-links { display: flex; gap: 2rem; }
 
     /* ============================================================
        WHATSAPP FLOAT
@@ -1666,38 +1638,15 @@
       font-weight: 600;
       letter-spacing: .03em;
       transition: var(--transition);
-      text-decoration: none;
     }
 
-    .whatsapp-float i {
-      font-size: 1.3rem;
-    }
+    .whatsapp-float i { font-size: 1.3rem; }
 
     .whatsapp-float:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 40px rgba(37,211,102,.45);
       color: var(--white);
     }
-
-    /* ============================================================
-       ANIMAÇÕES DE ENTRADA
-    ============================================================ */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fade-up-delay-1 { transition-delay: .1s; }
-    .fade-up-delay-2 { transition-delay: .2s; }
-    .fade-up-delay-3 { transition-delay: .3s; }
-    .fade-up-delay-4 { transition-delay: .4s; }
-    .fade-up-delay-5 { transition-delay: .5s; }
 
     /* ============================================================
        SCROLL TO TOP
@@ -1724,10 +1673,7 @@
       box-shadow: var(--shadow-md);
     }
 
-    #scrollTop.visible {
-      opacity: 1;
-      pointer-events: all;
-    }
+    #scrollTop.visible { opacity: 1; pointer-events: all; }
 
     #scrollTop:hover {
       background: var(--gold);
@@ -1736,16 +1682,33 @@
     }
 
     /* ============================================================
+       ANIMAÇÕES FADE UP
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .fade-up-delay-1 { transition-delay: .1s; }
+    .fade-up-delay-2 { transition-delay: .2s; }
+    .fade-up-delay-3 { transition-delay: .3s; }
+    .fade-up-delay-4 { transition-delay: .4s; }
+
+    /* ============================================================
        RESPONSIVO
     ============================================================ */
     @media (max-width: 1024px) {
-      .areas-grid           { grid-template-columns: repeat(2, 1fr); }
-      .diferenciais-grid    { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid          { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .sobre-grid           { gap: 3rem; }
+      .areas-grid        { grid-template-columns: repeat(2, 1fr); }
+      .diferenciais-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid       { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .sobre-grid        { gap: 3rem; }
     }
 
     @media (max-width: 768px) {
+      /* Menu mobile */
       .nav-menu {
         position: fixed;
         top: 0;
@@ -1762,22 +1725,18 @@
         border-left: 1px solid rgba(200,169,106,.1);
         box-shadow: -20px 0 60px rgba(0,0,0,.4);
         z-index: 999;
+        overflow-y: auto;
       }
 
       .nav-menu.open { right: 0; }
-
-      .nav-link {
-        font-size: 1rem;
-        color: rgba(255,255,255,.85);
-      }
+      .nav-link { font-size: 1rem; color: rgba(255,255,255,.85); }
 
       .nav-cta {
         width: 100%;
         text-align: center;
-        justify-content: center;
       }
 
-      .nav-toggle { display: flex; z-index: 1000; }
+      .nav-toggle { display: flex; }
 
       .nav-overlay {
         display: none;
@@ -1789,40 +1748,63 @@
 
       .nav-overlay.open { display: block; }
 
-      .hero-content       { padding: 8rem 0 4rem; }
-      .hero-stats         { gap: 2rem; }
-      .sobre-grid         { grid-template-columns: 1fr; }
-      .sobre-card-float   { right: 0; bottom: -1.5rem; }
-      .areas-grid         { grid-template-columns: 1fr; }
-      .diferenciais-grid  { grid-template-columns: 1fr 1fr; }
-      .numeros-grid       { grid-template-columns: repeat(2, 1fr); }
+      /* Hero mobile: manter centralização */
+      .hero-content { padding: 7rem 0 4rem; }
+      .hero-stats   { gap: 2rem; }
+
+      .sobre-grid       { grid-template-columns: 1fr; }
+      .sobre-card-float { right: 0; bottom: -1.5rem; }
+      .sobre-gold-bar   { display: none; }
+
+      .areas-grid        { grid-template-columns: 1fr; }
+      .diferenciais-grid { grid-template-columns: 1fr 1fr; }
+
+      .numeros-grid      { grid-template-columns: repeat(2, 1fr); }
       .numero-item::after { display: none; }
-      .depoimentos-grid   { grid-template-columns: 1fr; }
-      .equipe-grid        { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-      .contato-grid       { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-grid        { grid-template-columns: 1fr; }
-      .trust-bar-inner    { gap: 1.5rem; }
-      .trust-sep          { display: none; }
-      .form-row           { grid-template-columns: 1fr; }
-      .footer-bottom-inner{ flex-direction: column; text-align: center; }
-      .footer-bottom-links{ flex-direction: column; gap: 1rem; align-items: center; }
-      .whatsapp-float span{ display: none; }
-      .whatsapp-float     { padding: 1rem; border-radius: 50%; }
+
+      .depoimentos-grid  { grid-template-columns: 1fr; }
+      .equipe-grid       { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+
+      .contato-grid  { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid   { grid-template-columns: 1fr; }
+
+      .trust-bar-inner { gap: 1.5rem; }
+      .trust-sep       { display: none; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-bottom-inner { flex-direction: column; text-align: center; }
+      .footer-bottom-links { flex-direction: column; gap: 1rem; align-items: center; }
+
+      /* WhatsApp mobile: só ícone */
+      .whatsapp-float .wa-label { display: none; }
+      .whatsapp-float {
+        padding: 1rem;
+        border-radius: 50%;
+        width: 54px;
+        height: 54px;
+        justify-content: center;
+      }
     }
 
     @media (max-width: 480px) {
       .diferenciais-grid { grid-template-columns: 1fr; }
-      .hero-actions      { flex-direction: column; }
-      .hero-actions .btn { width: 100%; justify-content: center; }
-      .cta-actions       { flex-direction: column; align-items: center; }
-      .cta-actions .btn  { width: 100%; max-width: 320px; justify-content: center; }
-      .contato-form      { padding: 2rem 1.5rem; }
-      .sobre-card-float  { position: static; margin-top: 1.5rem; }
-      .sobre-gold-bar    { display: none; }
+
+      /* Botões do hero em coluna no mobile */
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-actions .btn { width: 100%; max-width: 320px; }
+
+      .cta-actions           { flex-direction: column; align-items: center; }
+      .cta-actions .btn      { width: 100%; max-width: 320px; }
+      .contato-form          { padding: 2rem 1.5rem; }
+      .sobre-card-float      { position: static; margin-top: 1.5rem; }
     }
   </style>
 </head>
-
 <body>
 
   <!-- ============================================================
@@ -1832,8 +1814,7 @@
     <div class="container">
       <nav class="nav-inner" aria-label="Navegação principal">
 
-        <!-- Logo -->
-        <a href="#" class="nav-logo" aria-label="Zezinho Goiano Advocacia - Página inicial">
+        <a href="#" class="nav-logo" aria-label="ZG Advocacia — Página inicial">
           <div class="nav-logo-icon" aria-hidden="true">
             <i class="fas fa-balance-scale"></i>
           </div>
@@ -1843,23 +1824,20 @@
           </div>
         </a>
 
-        <!-- Menu Desktop -->
         <ul class="nav-menu" id="navMenu" role="list">
-          <li><a href="#sobre"        class="nav-link" role="listitem">O Escritório</a></li>
-          <li><a href="#areas"        class="nav-link" role="listitem">Áreas de Atuação</a></li>
-          <li><a href="#diferenciais" class="nav-link" role="listitem">Diferenciais</a></li>
-          <li><a href="#equipe"       class="nav-link" role="listitem">Equipe</a></li>
-          <li><a href="#contato"      class="nav-link nav-cta" role="listitem">Falar com Especialista</a></li>
+          <li><a href="#sobre"        class="nav-link">O Escritório</a></li>
+          <li><a href="#areas"        class="nav-link">Áreas de Atuação</a></li>
+          <li><a href="#diferenciais" class="nav-link">Diferenciais</a></li>
+          <li><a href="#equipe"       class="nav-link">Equipe</a></li>
+          <li><a href="#contato"      class="nav-link nav-cta">Falar com Especialista</a></li>
         </ul>
 
-        <!-- Overlay mobile -->
         <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
-        <!-- Toggle mobile -->
         <button
           class="nav-toggle"
           id="navToggle"
-          aria-label="Abrir menu de navegação"
+          aria-label="Abrir menu"
           aria-expanded="false"
           aria-controls="navMenu"
         >
@@ -1873,85 +1851,86 @@
   </header>
 
   <!-- ============================================================
-       HERO — FULL SCREEN
+       HERO
   ============================================================ -->
   <section id="hero" aria-label="Apresentação do escritório">
+
+    <!-- Fundo isolado — overflow:hidden no #hero clippa qualquer vazamento -->
     <div class="hero-bg" role="img" aria-label="Escritório de advocacia moderno"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-texture" aria-hidden="true"></div>
 
-    <div class="container">
-      <div class="hero-content">
+    <!-- Conteúdo centralizado -->
+    <div class="hero-content-wrap">
+      <div class="container">
+        <div class="hero-content">
 
-        <!-- Badge de credencial -->
-        <div class="hero-badge" role="note">
-          <i class="fas fa-circle" aria-hidden="true" style="font-size:.5rem; color:var(--gold);"></i>
-          <span>OAB/GO — Fundado em 2005 · +20 anos de atuação</span>
-        </div>
-
-        <!-- Título principal -->
-        <h1 class="hero-title">
-          Protegemos seus<br />
-          direitos com <em>expertise</em><br />
-          e dedicação total
-        </h1>
-
-        <!-- Subtítulo -->
-        <p class="hero-subtitle">
-          Soluções jurídicas estratégicas para pessoas e empresas que buscam
-          resultados concretos. Atendimento personalizado, ética inabalável e
-          comprometimento com cada etapa do seu caso.
-        </p>
-
-        <!-- Botões de CTA -->
-        <div class="hero-actions">
-          <a href="#contato" class="btn btn-primary">
-            <i class="fas fa-calendar-check" aria-hidden="true"></i>
-            Agende sua consulta jurídica
-          </a>
-          <a href="#areas" class="btn btn-outline">
-            <i class="fas fa-layer-group" aria-hidden="true"></i>
-            Conheça nossas áreas de atuação
-          </a>
-        </div>
-
-        <!-- Divisor dourado -->
-        <div class="hero-divider" aria-hidden="true"></div>
-
-        <!-- Estatísticas rápidas -->
-        <div class="hero-stats" role="list" aria-label="Estatísticas do escritório">
-          <div class="hero-stat" role="listitem">
-            <span class="hero-stat-number">20<span>+</span></span>
-            <span class="hero-stat-label">Anos de Experiência</span>
+          <div class="hero-badge">
+            <i class="fas fa-circle" aria-hidden="true"></i>
+            <span>OAB/GO — Fundado em 2005 · +20 anos de atuação</span>
           </div>
-          <div class="hero-stat" role="listitem">
-            <span class="hero-stat-number">3.500<span>+</span></span>
-            <span class="hero-stat-label">Casos Resolvidos</span>
-          </div>
-          <div class="hero-stat" role="listitem">
-            <span class="hero-stat-number">98<span>%</span></span>
-            <span class="hero-stat-label">Clientes Satisfeitos</span>
-          </div>
-          <div class="hero-stat" role="listitem">
-            <span class="hero-stat-number">12<span>+</span></span>
-            <span class="hero-stat-label">Advogados Especialistas</span>
-          </div>
-        </div>
 
-      </div>
-    </div>
+          <h1 class="hero-title">
+            Protegemos seus direitos<br />
+            com <em>expertise</em> e<br />
+            dedicação total
+          </h1>
 
-    <!-- Scroll indicator -->
-    <a href="#trust-bar" class="hero-scroll" aria-label="Rolar para o próximo conteúdo">
+          <p class="hero-subtitle">
+            Soluções jurídicas estratégicas para pessoas e empresas que buscam
+            resultados concretos. Atendimento personalizado, ética inabalável e
+            comprometimento em cada etapa do seu caso.
+          </p>
+
+          <!-- BOTÕES — justify-content: center garante centralização -->
+          <div class="hero-actions">
+            <a href="#contato" class="btn btn-primary">
+              <i class="fas fa-calendar-check" aria-hidden="true"></i>
+              Agende sua consulta jurídica
+            </a>
+            <a href="#areas" class="btn btn-outline">
+              <i class="fas fa-layer-group" aria-hidden="true"></i>
+              Conheça nossas áreas de atuação
+            </a>
+          </div>
+
+          <div class="hero-divider" aria-hidden="true"></div>
+
+          <div class="hero-stats" role="list" aria-label="Estatísticas do escritório">
+            <div class="hero-stat" role="listitem">
+              <span class="hero-stat-number">20<span>+</span></span>
+              <span class="hero-stat-label">Anos de Experiência</span>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <span class="hero-stat-number">3.500<span>+</span></span>
+              <span class="hero-stat-label">Casos Resolvidos</span>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <span class="hero-stat-number">98<span>%</span></span>
+              <span class="hero-stat-label">Clientes Satisfeitos</span>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <span class="hero-stat-number">12<span>+</span></span>
+              <span class="hero-stat-label">Advogados Especialistas</span>
+            </div>
+          </div>
+
+        </div><!-- /.hero-content -->
+      </div><!-- /.container -->
+    </div><!-- /.hero-content-wrap -->
+
+    <!-- Scroll indicator absoluto dentro do hero -->
+    <a href="#trust-bar" class="hero-scroll" aria-label="Rolar para próximo conteúdo">
       <div class="scroll-mouse" aria-hidden="true"></div>
       <span>Explorar</span>
     </a>
+
   </section>
 
   <!-- ============================================================
        TRUST BAR
   ============================================================ -->
-  <div id="trust-bar" role="complementary" aria-label="Credenciais e certificações">
+  <div id="trust-bar" role="complementary" aria-label="Credenciais">
     <div class="container">
       <div class="trust-bar-inner">
         <div class="trust-item">
@@ -1983,70 +1962,65 @@
   </div>
 
   <!-- ============================================================
-       SOBRE O ESCRITÓRIO
+       SOBRE
   ============================================================ -->
   <section id="sobre" aria-labelledby="sobre-title">
     <div class="container">
       <div class="sobre-grid">
 
-        <!-- Visual -->
         <div class="sobre-visual fade-up">
           <div class="sobre-gold-bar" aria-hidden="true"></div>
           <div class="sobre-img-wrap">
             <img
               src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=800&q=80"
-              alt="Interior do escritório ZG Advocacia — ambiente elegante e profissional"
+              alt="Interior do escritório ZG Advocacia"
               loading="lazy"
               width="800"
               height="520"
             />
           </div>
-          <!-- Cartão flutuante -->
-          <div class="sobre-card-float" aria-label="20 anos de excelência jurídica">
+          <div class="sobre-card-float">
             <div class="sobre-card-float-number">20<span>+</span></div>
             <div class="sobre-card-float-label">Anos de excelência<br>jurídica em Goiás</div>
           </div>
         </div>
 
-        <!-- Texto -->
         <div class="sobre-text fade-up fade-up-delay-2">
           <span class="section-label">O Escritório</span>
           <span class="gold-line" aria-hidden="true"></span>
           <h2 class="section-title" id="sobre-title">
-            Tradição, ética e<br />resultados que falam<br />por si só
+            Tradição, ética e resultados<br />que falam por si só
           </h2>
-          <p class="section-subtitle">
+          <p class="section-subtitle" style="margin-bottom:2.5rem;">
             Fundado em 2005, o ZG Advocacia consolidou-se como referência em Goiás
             pela combinação única de profundo conhecimento técnico e atenção
             genuína a cada cliente. Nossa missão é oferecer soluções jurídicas
-            precisas, acessíveis e eficazes — porque acreditamos que a Justiça
-            deve estar ao alcance de todos.
+            precisas, acessíveis e eficazes.
           </p>
 
-          <!-- Valores -->
-          <div class="sobre-valores" role="list" aria-label="Nossos valores">
-            <div class="sobre-valor" role="listitem">
+          <div class="sobre-valores">
+            <div class="sobre-valor">
               <div class="sobre-valor-icon" aria-hidden="true"><i class="fas fa-balance-scale"></i></div>
               <div>
                 <h4>Ética Inabalável</h4>
                 <p>Atuamos com integridade em cada etapa do processo.</p>
               </div>
             </div>
-            <div class="sobre-valor" role="listitem">
+            <div class="sobre-valor">
               <div class="sobre-valor-icon" aria-hidden="true"><i class="fas fa-bullseye"></i></div>
               <div>
                 <h4>Foco em Resultados</h4>
-                <p>Estratégias jurídicas orientadas a conquistas reais.</p>
+                <p>Estratégias orientadas a conquistas reais.</p>
               </div>
             </div>
-            <div class="sobre-valor" role="listitem">
+            <div class="sobre-valor">
               <div class="sobre-valor-icon" aria-hidden="true"><i class="fas fa-user-tie"></i></div>
               <div>
                 <h4>Atendimento Exclusivo</h4>
-                <p>Cada cliente recebe atenção personalizada e dedicada.</p>
+                <p>Atenção personalizada e dedicada a cada cliente.</p>
               </div>
             </div>
-            <div class="sobre-valor" role="listitem">
+            <div class="sobre-valor">
               <div class="sobre-valor-icon" aria-hidden="true"><i class="fas fa-graduation-cap"></i></div>
               <div>
                 <h4>Atualização Contínua</h4>
@@ -2075,73 +2049,71 @@
       <header class="areas-header fade-up">
         <span class="section-label">Especialidades</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
-        <h2 class="section-title" id="areas-title">
-          Nossas áreas de atuação
-        </h2>
-        <p class="section-subtitle" style="margin: 1rem auto 0;">
-          Atuamos em múltiplas frentes do Direito, oferecendo expertise técnica
+        <h2 class="section-title" id="areas-title">Nossas áreas de atuação</h2>
+        <p class="section-subtitle" style="margin:1rem auto 0;">
+          Atuamos em múltiplas frentes do Direito, com expertise técnica
           e estratégia para cada situação.
         </p>
       </header>
 
-      <div class="areas-grid" role="list" aria-label="Áreas de atuação do escritório">
+      <div class="areas-grid">
 
-        <article class="area-card fade-up fade-up-delay-1" role="listitem">
+        <article class="area-card fade-up fade-up-delay-1">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
           <h3>Direito Civil</h3>
           <p>Representação em contratos, responsabilidade civil, família, heranças e
-             questões patrimoniais. Defendemos seus interesses com precisão e celeridade.</p>
-          <a href="#contato" class="area-card-link" aria-label="Consultar sobre Direito Civil">
+             questões patrimoniais com precisão e celeridade.</p>
+          <a href="#contato" class="area-card-link">
             Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
         </article>
 
-        <article class="area-card fade-up fade-up-delay-2" role="listitem">
+        <article class="area-card fade-up fade-up-delay-2">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-briefcase"></i></div>
           <h3>Direito Trabalhista</h3>
           <p>Assessoria completa em rescisões, verbas trabalhistas, assédio moral,
-             acidentes de trabalho e negociações coletivas para empresas e empregados.</p>
-          <a href="#contato" class="area-card-link" aria-label="Consultar sobre Direito Trabalhista">
+             acidentes de trabalho e negociações coletivas.</p>
+          <a href="#contato" class="area-card-link">
             Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
         </article>
 
-        <article class="area-card fade-up fade-up-delay-3" role="listitem">
+        <article class="area-card fade-up fade-up-delay-3">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-building"></i></div>
           <h3>Direito Empresarial</h3>
           <p>Constituição e dissolução de empresas, contratos comerciais, fusões,
-             aquisições e proteção do patrimônio corporativo com segurança jurídica.</p>
-          <a href="#contato" class="area-card-link" aria-label="Consultar sobre Direito Empresarial">
+             aquisições e proteção do patrimônio corporativo.</p>
+          <a href="#contato" class="area-card-link">
             Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
         </article>
 
-        <article class="area-card fade-up fade-up-delay-1" role="listitem">
+        <article class="area-card fade-up fade-up-delay-1">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-landmark"></i></div>
           <h3>Direito Tributário</h3>
           <p>Planejamento tributário, defesa em autos de infração, recuperação de
-             créditos fiscais e conformidade com obrigações acessórias para sua empresa.</p>
-          <a href="#contato" class="area-card-link" aria-label="Consultar sobre Direito Tributário">
+             créditos fiscais e conformidade com obrigações acessórias.</p>
+          <a href="#contato" class="area-card-link">
             Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
         </article>
 
-        <article class="area-card fade-up fade-up-delay-2" role="listitem">
+        <article class="area-card fade-up fade-up-delay-2">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-house"></i></div>
           <h3>Direito Imobiliário</h3>
           <p>Regularização de imóveis, contratos de compra e venda, locação,
-             usucapião, financiamentos e registro de propriedades com total segurança.</p>
-          <a href="#contato" class="area-card-link" aria-label="Consultar sobre Direito Imobiliário">
+             usucapião e financiamentos com total segurança jurídica.</p>
+          <a href="#contato" class="area-card-link">
             Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
         </article>
 
-        <article class="area-card fade-up fade-up-delay-3" role="listitem">
+        <article class="area-card fade-up fade-up-delay-3">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></div>
           <h3>Direito do Consumidor</h3>
-          <p>Defesa dos seus direitos frente a fornecedores, cobranças indevidas,
-             produtos defeituosos, negativações indevidas e danos morais e materiais.</p>
-          <a href="#contato" class="area-card-link" aria-label="Consultar sobre Direito do Consumidor">
+          <p>Defesa dos seus direitos frente a cobranças indevidas, produtos
+             defeituosos, negativações indevidas e danos morais.</p>
+          <a href="#contato" class="area-card-link">
             Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
         </article>
@@ -2155,13 +2127,12 @@
   ============================================================ -->
   <section id="diferenciais" aria-labelledby="diferenciais-title">
     <div class="diferenciais-bg-shape" aria-hidden="true"></div>
-
     <div class="container">
       <header class="diferenciais-header fade-up">
         <span class="section-label">Por que nos escolher</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
         <h2 class="section-title" id="diferenciais-title">
-          O padrão que nos<br />diferencia no mercado
+          O padrão que nos diferencia no mercado
         </h2>
         <p class="section-subtitle">
           Não somos apenas advogados. Somos parceiros estratégicos comprometidos
@@ -2169,36 +2140,27 @@
         </p>
       </header>
 
-      <div class="diferenciais-grid" role="list" aria-label="Diferenciais do escritório">
-
-        <div class="diferencial-item fade-up fade-up-delay-1" role="listitem">
+      <div class="diferenciais-grid">
+        <div class="diferencial-item fade-up fade-up-delay-1">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-chart"></i></div>
           <h3>Análise Estratégica</h3>
-          <p>Cada caso recebe uma análise minuciosa para identificar a melhor
-             estratégia jurídica com foco em resultado.</p>
+          <p>Cada caso recebe análise minuciosa para identificar a melhor estratégia com foco em resultado.</p>
         </div>
-
-        <div class="diferencial-item fade-up fade-up-delay-2" role="listitem">
+        <div class="diferencial-item fade-up fade-up-delay-2">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-comments"></i></div>
           <h3>Comunicação Transparente</h3>
-          <p>Mantemos você informado em cada etapa do processo, com linguagem
-             clara e acessível, sem jargões técnicos desnecessários.</p>
+          <p>Mantemos você informado em cada etapa do processo com linguagem clara e acessível.</p>
         </div>
-
-        <div class="diferencial-item fade-up fade-up-delay-3" role="listitem">
+        <div class="diferencial-item fade-up fade-up-delay-3">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-clock-rotate-left"></i></div>
           <h3>Agilidade Processual</h3>
-          <p>Utilizamos tecnologia jurídica de ponta para acelerar prazos e
-             garantir eficiência máxima em cada procedimento.</p>
+          <p>Utilizamos tecnologia jurídica de ponta para acelerar prazos com eficiência máxima.</p>
         </div>
-
-        <div class="diferencial-item fade-up fade-up-delay-4" role="listitem">
+        <div class="diferencial-item fade-up fade-up-delay-4">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-lock"></i></div>
           <h3>Sigilo Absoluto</h3>
-          <p>Todas as informações compartilhadas são tratadas com o mais alto
-             nível de confidencialidade e proteção de dados.</p>
+          <p>Todas as informações são tratadas com o mais alto nível de confidencialidade.</p>
         </div>
-
       </div>
     </div>
   </section>
@@ -2208,29 +2170,21 @@
   ============================================================ -->
   <section id="numeros" aria-label="Estatísticas do escritório">
     <div class="container">
-      <div class="numeros-grid" role="list" aria-label="Números e conquistas">
-        <div class="numero-item fade-up fade-up-delay-1" role="listitem">
-          <div class="numero-value" aria-label="Mais de 3500 casos atendidos">
-            3.500<span>+</span>
-          </div>
+      <div class="numeros-grid">
+        <div class="numero-item fade-up fade-up-delay-1">
+          <div class="numero-value">3.500<span>+</span></div>
           <div class="numero-label">Casos Atendidos</div>
         </div>
-        <div class="numero-item fade-up fade-up-delay-2" role="listitem">
-          <div class="numero-value" aria-label="Mais de 20 anos de atuação">
-            20<span>+</span>
-          </div>
+        <div class="numero-item fade-up fade-up-delay-2">
+          <div class="numero-value">20<span>+</span></div>
           <div class="numero-label">Anos de Atuação</div>
         </div>
-        <div class="numero-item fade-up fade-up-delay-3" role="listitem">
-          <div class="numero-value" aria-label="98% de taxa de satisfação">
-            98<span>%</span>
-          </div>
+        <div class="numero-item fade-up fade-up-delay-3">
+          <div class="numero-value">98<span>%</span></div>
           <div class="numero-label">Satisfação dos Clientes</div>
         </div>
-        <div class="numero-item fade-up fade-up-delay-4" role="listitem">
-          <div class="numero-value" aria-label="Mais de 12 especialistas">
-            12<span>+</span>
-          </div>
+        <div class="numero-item fade-up fade-up-delay-4">
+          <div class="numero-value">12<span>+</span></div>
           <div class="numero-label">Advogados Especialistas</div>
         </div>
       </div>
@@ -2246,13 +2200,13 @@
         <span class="section-label">Depoimentos</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
         <h2 class="section-title" id="depoimentos-title">
-          O que nossos clientes<br />dizem sobre nós
+          O que nossos clientes dizem sobre nós
         </h2>
       </header>
 
-      <div class="depoimentos-grid" role="list" aria-label="Depoimentos de clientes">
+      <div class="depoimentos-grid">
 
-        <article class="depoimento-card fade-up fade-up-delay-1" role="listitem">
+        <article class="depoimento-card fade-up fade-up-delay-1">
           <div class="depoimento-quote" aria-hidden="true">"</div>
           <div class="depoimento-stars" aria-label="5 estrelas">
             <i class="fas fa-star" aria-hidden="true"></i>
@@ -2275,7 +2229,7 @@
           </div>
         </article>
 
-        <article class="depoimento-card fade-up fade-up-delay-2" role="listitem">
+        <article class="depoimento-card fade-up fade-up-delay-2">
           <div class="depoimento-quote" aria-hidden="true">"</div>
           <div class="depoimento-stars" aria-label="5 estrelas">
             <i class="fas fa-star" aria-hidden="true"></i>
@@ -2287,7 +2241,7 @@
           <p class="depoimento-text">
             "Profissionalismo e atenção que raramente se encontra. Desde o
             primeiro atendimento fui tratada com respeito e total clareza sobre
-            meu caso. Recomendo sem hesitar a todos."
+            meu caso. Recomendo sem hesitar."
           </p>
           <div class="depoimento-author">
             <div class="depoimento-avatar" aria-hidden="true">AC</div>
@@ -2298,7 +2252,7 @@
           </div>
         </article>
 
-        <article class="depoimento-card fade-up fade-up-delay-3" role="listitem">
+        <article class="depoimento-card fade-up fade-up-delay-3">
           <div class="depoimento-quote" aria-hidden="true">"</div>
           <div class="depoimento-stars" aria-label="5 estrelas">
             <i class="fas fa-star" aria-hidden="true"></i>
@@ -2334,26 +2288,26 @@
         <span class="section-label">Nossa Equipe</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
         <h2 class="section-title" id="equipe-title" style="text-align:center;">
-          Advogados que fazem<br />a diferença
+          Advogados que fazem a diferença
         </h2>
       </header>
 
-      <div class="equipe-grid" role="list" aria-label="Equipe de advogados">
+      <div class="equipe-grid">
 
-        <article class="equipe-card fade-up fade-up-delay-1" role="listitem">
+        <article class="equipe-card fade-up fade-up-delay-1">
           <div class="equipe-img-wrap">
             <img
               src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80"
-              alt="Dr. José Goiano — Sócio fundador e especialista em Direito Civil"
+              alt="Dr. José Goiano — Sócio fundador"
               loading="lazy"
               width="600"
               height="360"
             />
             <div class="equipe-overlay" aria-hidden="true">
               <div class="equipe-social">
-                <a href="#" aria-label="LinkedIn de Dr. José Goiano"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Instagram de Dr. José Goiano"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="E-mail de Dr. José Goiano"><i class="fas fa-envelope"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="E-mail"><i class="fas fa-envelope"></i></a>
               </div>
             </div>
           </div>
@@ -2363,20 +2317,20 @@
              empresariais complexos e referência no estado de Goiás.</p>
         </article>
 
-        <article class="equipe-card fade-up fade-up-delay-2" role="listitem">
+        <article class="equipe-card fade-up fade-up-delay-2">
           <div class="equipe-img-wrap">
             <img
               src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
-              alt="Dra. Fernanda Alves — Especialista em Direito Trabalhista"
+              alt="Dra. Fernanda Alves — Especialista Trabalhista"
               loading="lazy"
               width="600"
               height="360"
             />
             <div class="equipe-overlay" aria-hidden="true">
               <div class="equipe-social">
-                <a href="#" aria-label="LinkedIn de Dra. Fernanda Alves"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Instagram de Dra. Fernanda Alves"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="E-mail de Dra. Fernanda Alves"><i class="fas fa-envelope"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="E-mail"><i class="fas fa-envelope"></i></a>
               </div>
             </div>
           </div>
@@ -2386,28 +2340,27 @@
              e defesa de empregados e empresas em toda a região Centro-Oeste.</p>
         </article>
 
-        <article class="equipe-card fade-up fade-up-delay-3" role="listitem">
+        <article class="equipe-card fade-up fade-up-delay-3">
           <div class="equipe-img-wrap">
             <img
               src="https://images.unsplash.com/photo-1556157382-97eda2f9e2bf?auto=format&fit=crop&w=600&q=80"
-              alt="Dr. Ricardo Medeiros — Especialista em Direito Tributário"
+              alt="Dr. Ricardo Medeiros — Tributarista"
               loading="lazy"
               width="600"
               height="360"
             />
             <div class="equipe-overlay" aria-hidden="true">
               <div class="equipe-social">
-                <a href="#" aria-label="LinkedIn de Dr. Ricardo Medeiros"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Instagram de Dr. Ricardo Medeiros"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="E-mail de Dr. Ricardo Medeiros"><i class="fas fa-envelope"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="E-mail"><i class="fas fa-envelope"></i></a>
               </div>
             </div>
           </div>
           <h3>Dr. Ricardo Medeiros</h3>
           <p class="equipe-card-role">Associado Sênior · Direito Tributário & Fiscal</p>
-          <p>Especialista em planejamento tributário e contencioso fiscal, com
-             histórico comprovado de recuperação de créditos para empresas de
-             médio e grande porte.</p>
+          <p>Especialista em planejamento tributário e contencioso fiscal com
+             histórico comprovado de recuperação de créditos para empresas.</p>
         </article>
 
       </div>
@@ -2426,7 +2379,7 @@
         <h2 class="section-title" id="cta-title">
           Seu problema jurídico<br />merece uma solução de alto nível
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" style="margin:1rem auto 3rem;">
           Não espere o problema crescer. Consulte agora um dos nossos especialistas
           e receba uma análise completa e estratégica do seu caso.
         </p>
@@ -2455,7 +2408,6 @@
     <div class="container">
       <div class="contato-grid">
 
-        <!-- Informações -->
         <div class="contato-info fade-up">
           <span class="section-label">Contato</span>
           <span class="gold-line" aria-hidden="true"></span>
@@ -2464,32 +2416,31 @@
           </h2>
           <p class="section-subtitle">
             Entre em contato pelos canais abaixo ou preencha o formulário.
-            Retornamos em até 24 horas úteis com uma análise preliminar do seu caso.
+            Retornamos em até 24 horas úteis.
           </p>
-
-          <div class="contato-items" role="list" aria-label="Informações de contato">
-            <div class="contato-item" role="listitem">
+          <div class="contato-items">
+            <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></div>
               <div>
                 <h4>Endereço</h4>
                 <p>Av. T-63, 1234 — Setor Bueno<br />Goiânia — GO, 74215-010</p>
               </div>
             </div>
-            <div class="contato-item" role="listitem">
+            <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-phone"></i></div>
               <div>
                 <h4>Telefone</h4>
-                <a href="tel:+556299999999" aria-label="Ligar para (62) 9999-9999">(62) 9999-9999</a>
+                <a href="tel:+556299999999">(62) 9999-9999</a>
               </div>
             </div>
-            <div class="contato-item" role="listitem">
+            <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
               <div>
                 <h4>E-mail</h4>
                 <a href="mailto:contato@zgadvocacia.com.br">contato@zgadvocacia.com.br</a>
               </div>
             </div>
-            <div class="contato-item" role="listitem">
+            <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-clock"></i></div>
               <div>
                 <h4>Horário de Atendimento</h4>
@@ -2499,7 +2450,6 @@
           </div>
         </div>
 
-        <!-- Formulário -->
         <div class="fade-up fade-up-delay-2">
           <form class="contato-form" novalidate aria-label="Formulário de contato">
             <h3>Solicite uma análise<br />do seu caso</h3>
@@ -2510,46 +2460,22 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="nome">Nome completo</label>
-                <input
-                  type="text"
-                  id="nome"
-                  name="nome"
-                  placeholder="Seu nome completo"
-                  autocomplete="name"
-                  required
-                  aria-required="true"
-                />
+                <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name" required />
               </div>
               <div class="form-group">
                 <label for="telefone">Telefone / WhatsApp</label>
-                <input
-                  type="tel"
-                  id="telefone"
-                  name="telefone"
-                  placeholder="(62) 9 9999-9999"
-                  autocomplete="tel"
-                  required
-                  aria-required="true"
-                />
+                <input type="tel" id="telefone" name="telefone" placeholder="(62) 9 9999-9999" autocomplete="tel" required />
               </div>
             </div>
 
             <div class="form-group">
               <label for="email">E-mail</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="seu@email.com"
-                autocomplete="email"
-                required
-                aria-required="true"
-              />
+              <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required />
             </div>
 
             <div class="form-group">
               <label for="area">Área jurídica de interesse</label>
-              <select id="area" name="area" required aria-required="true">
+              <select id="area" name="area" required>
                 <option value="" disabled selected>Selecione uma área</option>
                 <option value="civil">Direito Civil</option>
                 <option value="trabalhista">Direito Trabalhista</option>
@@ -2563,13 +2489,7 @@
 
             <div class="form-group">
               <label for="mensagem">Descreva brevemente seu caso</label>
-              <textarea
-                id="mensagem"
-                name="mensagem"
-                placeholder="Descreva sua situação para que possamos orientá-lo da melhor forma..."
-                required
-                aria-required="true"
-              ></textarea>
+              <textarea id="mensagem" name="mensagem" placeholder="Descreva sua situação para que possamos orientá-lo..." required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary form-submit">
@@ -2577,7 +2497,7 @@
               Solicitar análise do caso
             </button>
 
-            <p class="form-privacy" role="note">
+            <p class="form-privacy">
               <i class="fas fa-shield-halved" aria-hidden="true"></i>
               Seus dados são protegidos e tratados com total confidencialidade.
             </p>
@@ -2589,12 +2509,11 @@
   </section>
 
   <!-- ============================================================
-       RODAPÉ
+       RODAPÉ — último elemento do body, sem nada depois
   ============================================================ -->
   <footer id="footer" role="contentinfo">
 
-    <!-- Barra de certificações -->
-    <div class="footer-awards" aria-label="Certificações e reconhecimentos">
+    <div class="footer-awards">
       <div class="container">
         <div class="footer-awards-inner">
           <div class="footer-award">
@@ -2617,12 +2536,10 @@
       </div>
     </div>
 
-    <!-- Corpo principal do rodapé -->
     <div class="footer-top">
       <div class="container">
         <div class="footer-grid">
 
-          <!-- Coluna marca -->
           <div>
             <div class="footer-brand">
               <div class="footer-logo-icon" aria-hidden="true">
@@ -2639,17 +2556,16 @@
               genuíno com os resultados de cada cliente.
             </p>
             <nav class="footer-social" aria-label="Redes sociais">
-              <a href="#" aria-label="Instagram do escritório"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-              <a href="#" aria-label="Facebook do escritório"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-              <a href="#" aria-label="LinkedIn do escritório"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-              <a href="#" aria-label="YouTube do escritório"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
             </nav>
           </div>
 
-          <!-- Navegação -->
           <div class="footer-col">
             <h4>Navegação</h4>
-            <nav class="footer-links" aria-label="Links de navegação do rodapé">
+            <nav class="footer-links" aria-label="Links do rodapé">
               <a href="#sobre">O Escritório</a>
               <a href="#areas">Áreas de Atuação</a>
               <a href="#diferenciais">Diferenciais</a>
@@ -2659,10 +2575,9 @@
             </nav>
           </div>
 
-          <!-- Especialidades -->
           <div class="footer-col">
             <h4>Especialidades</h4>
-            <nav class="footer-links" aria-label="Links das especialidades">
+            <nav class="footer-links" aria-label="Especialidades">
               <a href="#areas">Direito Civil</a>
               <a href="#areas">Direito Trabalhista</a>
               <a href="#areas">Direito Empresarial</a>
@@ -2672,7 +2587,6 @@
             </nav>
           </div>
 
-          <!-- Contato -->
           <div class="footer-col">
             <h4>Contato</h4>
             <address class="footer-contact-list" style="font-style:normal;">
@@ -2699,15 +2613,11 @@
       </div>
     </div>
 
-    <!-- Rodapé inferior -->
     <div class="footer-bottom">
       <div class="container">
         <div class="footer-bottom-inner">
-          <p>
-            &copy; 2025 ZG Advocacia. Todos os direitos reservados.
-            OAB/GO n.º 00000.
-          </p>
-          <nav class="footer-bottom-links" aria-label="Links legais do rodapé">
+          <p>&copy; 2025 ZG Advocacia. Todos os direitos reservados. OAB/GO n.º 00000.</p>
+          <nav class="footer-bottom-links" aria-label="Links legais">
             <a href="#">Política de Privacidade</a>
             <a href="#">Termos de Uso</a>
             <a href="#">Aviso Legal</a>
@@ -2717,9 +2627,10 @@
     </div>
 
   </footer>
+  <!-- FIM DO FOOTER — nenhum elemento após este ponto -->
 
   <!-- ============================================================
-       WHATSAPP FLOAT
+       ELEMENTOS FIXOS (position:fixed — não afetam o fluxo do documento)
   ============================================================ -->
   <a
     href="https://wa.me/556299999999"
@@ -2729,15 +2640,12 @@
     aria-label="Fale conosco pelo WhatsApp"
   >
     <i class="fab fa-whatsapp" aria-hidden="true"></i>
-    <span>Fale agora com um especialista</span>
+    <span class="wa-label">Fale agora com um especialista</span>
   </a>
 
-  <!-- ============================================================
-       SCROLL TO TOP
-  ============================================================ -->
   <button
     id="scrollTop"
-    aria-label="Voltar ao topo da página"
+    aria-label="Voltar ao topo"
     onclick="window.scrollTo({top:0,behavior:'smooth'})"
   >
     <i class="fas fa-chevron-up" aria-hidden="true"></i>
@@ -2748,19 +2656,36 @@
   ============================================================ -->
   <script>
     /* ── Navbar scroll ── */
-    const navbar     = document.getElementById('navbar');
-    const scrollTop  = document.getElementById('scrollTop');
+    const navbar    = document.getElementById('navbar');
+    const scrollBtn = document.getElementById('scrollTop');
 
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       navbar.classList.toggle('scrolled', y > 60);
-      scrollTop.classList.toggle('visible', y > 500);
+      scrollBtn.classList.toggle('visible', y > 500);
     }, { passive: true });
 
-    /* ── Hero imagem carregada ── */
+    /* ── Hero: classe loaded para animação inicial ── */
     window.addEventListener('load', () => {
       document.getElementById('hero').classList.add('loaded');
     });
+
+    /* ── Parallax do hero — CONTROLADO para não vazar ──
+       translateY máximo = 8% da altura do hero,
+       equivalente ao top:-8% / bottom:-8% do .hero-bg,
+       então nunca revela borda branca.
+    ── */
+    const heroBg = document.querySelector('.hero-bg');
+    if (heroBg && window.innerWidth > 768) {
+      const heroEl = document.getElementById('hero');
+      window.addEventListener('scroll', () => {
+        const y       = window.scrollY;
+        const maxY    = heroEl.offsetHeight;
+        /* limitar a 60px de deslocamento */
+        const shift   = Math.min(y * 0.18, 60);
+        heroBg.style.transform = `translateY(${shift}px)`;
+      }, { passive: true });
+    }
 
     /* ── Menu Mobile ── */
     const toggle  = document.getElementById('navToggle');
@@ -2771,7 +2696,7 @@
       menu.classList.add('open');
       overlay.classList.add('open');
       toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', 'Fechar menu de navegação');
+      toggle.setAttribute('aria-label', 'Fechar menu');
       document.body.style.overflow = 'hidden';
     }
 
@@ -2779,7 +2704,7 @@
       menu.classList.remove('open');
       overlay.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Abrir menu de navegação');
+      toggle.setAttribute('aria-label', 'Abrir menu');
       document.body.style.overflow = '';
     }
 
@@ -2788,103 +2713,64 @@
     });
 
     overlay.addEventListener('click', closeMenu);
-
-    // Fechar menu ao clicar em links
-    menu.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    // Fechar com Escape
+    menu.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeMenu));
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
     });
 
     /* ── Intersection Observer — Fade Up ── */
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      }),
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    /* ── Contadores animados ── */
+    const countData = [
+      { target: 3500, suffix: '+' },
+      { target: 20,   suffix: '+' },
+      { target: 98,   suffix: '%' },
+      { target: 12,   suffix: '+' },
+    ];
 
-    /* ── Contador animado ── */
-    function animateCounter(el, target, suffix = '', duration = 1800) {
-      let start = 0;
-      const step = target / (duration / 16);
-      const timer = setInterval(() => {
-        start += step;
-        if (start >= target) {
-          el.textContent = target.toLocaleString('pt-BR') + suffix;
-          clearInterval(timer);
-        } else {
-          el.textContent = Math.floor(start).toLocaleString('pt-BR') + suffix;
-        }
-      }, 16);
-    }
-
-    const counterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const nums = entry.target.querySelectorAll('.numero-value');
-            const data = [
-              { target: 3500, suffix: '+' },
-              { target: 20,   suffix: '+' },
-              { target: 98,   suffix: '%' },
-              { target: 12,   suffix: '+' },
-            ];
-            nums.forEach((num, i) => {
-              num.innerHTML = `<span style="color:var(--gold)"></span>`;
-              const textNode = document.createTextNode('0');
-              num.insertBefore(textNode, num.firstChild);
-              animateCounter(
-                { textContent: '', parentNode: num },
-                data[i].target,
-                data[i].suffix
-              );
-              // Modo simplificado: animar diretamente o texto
-              let count = 0;
-              const t = data[i].target;
-              const s = data[i].suffix;
-              const interval = setInterval(() => {
-                count += Math.ceil(t / 80);
-                if (count >= t) {
-                  num.innerHTML = t.toLocaleString('pt-BR') + `<span>${s}</span>`;
-                  clearInterval(interval);
-                } else {
-                  num.innerHTML = count.toLocaleString('pt-BR') + `<span>${s}</span>`;
-                }
-              }, 20);
-            });
-            counterObserver.unobserve(entry.target);
-          }
+    const counterIO = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const items = entry.target.querySelectorAll('.numero-value');
+        items.forEach((el, i) => {
+          const { target, suffix } = countData[i];
+          let current = 0;
+          const step = Math.ceil(target / 60);
+          const interval = setInterval(() => {
+            current = Math.min(current + step, target);
+            el.innerHTML = current.toLocaleString('pt-BR') + `<span>${suffix}</span>`;
+            if (current >= target) clearInterval(interval);
+          }, 20);
         });
-      },
-      { threshold: 0.3 }
-    );
+        counterIO.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
 
-    const numerosSection = document.getElementById('numeros');
-    if (numerosSection) counterObserver.observe(numerosSection);
+    const numSection = document.getElementById('numeros');
+    if (numSection) counterIO.observe(numSection);
 
     /* ── Formulário ── */
     const form = document.querySelector('.contato-form');
     if (form) {
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', e => {
         e.preventDefault();
         const btn = form.querySelector('.form-submit');
-        const original = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Mensagem enviada!';
-        btn.style.background = 'linear-gradient(135deg, #4CAF50, #388E3C)';
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Mensagem enviada com sucesso!';
+        btn.style.background = 'linear-gradient(135deg,#4CAF50,#388E3C)';
         btn.disabled = true;
         setTimeout(() => {
-          btn.innerHTML = original;
+          btn.innerHTML = orig;
           btn.style.background = '';
           btn.disabled = false;
           form.reset();
@@ -2892,31 +2778,18 @@
       });
     }
 
-    /* ── Parallax sutil no hero ── */
-    const heroBg = document.querySelector('.hero-bg');
-    if (heroBg && window.innerWidth > 768) {
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        heroBg.style.transform = `scale(1) translateY(${y * 0.25}px)`;
-      }, { passive: true });
-    }
-
-    /* ── Máscaras de telefone ── */
+    /* ── Máscara de telefone ── */
     const telInput = document.getElementById('telefone');
     if (telInput) {
-      telInput.addEventListener('input', (e) => {
+      telInput.addEventListener('input', e => {
         let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-        if (v.length > 10) {
-          v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-        } else if (v.length > 6) {
-          v = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
-        } else if (v.length > 2) {
-          v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
-        }
+        if (v.length > 10)      v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+        else if (v.length > 6)  v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4})$/, '($1) $2-$3');
+        else if (v.length > 2)  v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
         e.target.value = v;
       });
     }
   </script>
 
 </body>
-            </html>
+              </html>
