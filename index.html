@@ -19,7 +19,7 @@
 
   <style>
     /* ============================================================
-       RESET RIGOROSO — evita repetição de conteúdo
+       RESET
     ============================================================ */
     *, *::before, *::after {
       margin: 0;
@@ -29,9 +29,7 @@
 
     html, body {
       width: 100%;
-      /* CRÍTICO: impede qualquer overflow horizontal/vertical fantasma */
       overflow-x: hidden;
-      /* NÃO colocar overflow-y: hidden no body — quebra o scroll */
     }
 
     html {
@@ -45,7 +43,6 @@
       background: #ffffff;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      /* Garante que o body termina no último filho */
       display: flex;
       flex-direction: column;
     }
@@ -64,23 +61,22 @@
       --gold-dark:   #A8894A;
       --white:       #FFFFFF;
       --off-white:   #F8F6F2;
-      --gray-100:    #F4F4F4;
       --gray-200:    #E8E8E8;
       --gray-400:    #9A9A9A;
       --gray-600:    #666666;
       --text-dark:   #1A1A1A;
       --text-body:   #3A3A3A;
 
-      --font-serif:  'Cormorant Garamond', Georgia, serif;
-      --font-sans:   'Inter', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
 
-      --shadow-sm:   0 2px 8px rgba(0,0,0,.06);
-      --shadow-md:   0 8px 32px rgba(0,0,0,.10);
-      --shadow-lg:   0 20px 60px rgba(0,0,0,.14);
+      --shadow-sm:  0 2px 8px rgba(0,0,0,.06);
+      --shadow-md:  0 8px 32px rgba(0,0,0,.10);
+      --shadow-lg:  0 20px 60px rgba(0,0,0,.14);
 
-      --radius-sm:   4px;
-      --radius-md:   8px;
-      --radius-lg:   16px;
+      --radius-sm:  4px;
+      --radius-md:  8px;
+      --radius-lg:  16px;
 
       --transition:      all .35s cubic-bezier(.4,0,.2,1);
       --transition-fast: all .2s ease;
@@ -97,7 +93,7 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
     }
 
     .gold-line {
@@ -118,47 +114,51 @@
       font-family: var(--font-sans);
       font-size: .72rem;
       font-weight: 600;
-      letter-spacing: .25em;
+      letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--gold);
     }
 
     .section-title {
       font-family: var(--font-serif);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.8rem, 4vw, 3rem);
       font-weight: 600;
       color: var(--navy);
       line-height: 1.2;
     }
 
     .section-subtitle {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--gray-600);
       max-width: 600px;
       line-height: 1.8;
     }
 
     /* ============================================================
-       BOTÕES
+       BOTÕES — mobile-first
     ============================================================ */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: .6rem;
-      padding: .9rem 2.2rem;
+      gap: .55rem;
+      /* padding responsivo: menor em mobile */
+      padding: .85rem 1.4rem;
       border-radius: var(--radius-sm);
       font-family: var(--font-sans);
-      font-size: .88rem;
+      font-size: .82rem;
       font-weight: 600;
-      letter-spacing: .06em;
+      letter-spacing: .05em;
       text-transform: uppercase;
       cursor: pointer;
       border: none;
       transition: var(--transition);
       position: relative;
       overflow: hidden;
+      /* CRÍTICO mobile: texto nunca quebra, não transborda */
       white-space: nowrap;
+      text-overflow: ellipsis;
+      line-height: 1.3;
     }
 
     .btn::after {
@@ -183,12 +183,10 @@
       box-shadow: 0 8px 32px rgba(200,169,106,.5);
     }
 
-    .btn-primary:active { transform: translateY(0); }
-
     .btn-outline {
       background: transparent;
       color: var(--white);
-      border: 1.5px solid rgba(255,255,255,.45);
+      border: 1.5px solid rgba(255,255,255,.5);
     }
 
     .btn-outline:hover {
@@ -213,17 +211,15 @@
     ============================================================ */
     #navbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 1000;
-      padding: 1.5rem 0;
+      padding: 1.25rem 0;
       transition: var(--transition);
     }
 
     #navbar.scrolled {
-      padding: .85rem 0;
-      background: rgba(15, 27, 45, .92);
+      padding: .75rem 0;
+      background: rgba(13, 30, 51, .93);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid rgba(200,169,106,.15);
@@ -239,57 +235,49 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: .85rem;
+      gap: .75rem;
       flex-shrink: 0;
     }
 
     .nav-logo-icon {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border: 1.5px solid var(--gold);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--gold);
-      font-size: 1rem;
-      transition: var(--transition);
+      font-size: .9rem;
+      flex-shrink: 0;
     }
 
-    .nav-logo:hover .nav-logo-icon {
-      background: rgba(200,169,106,.1);
-    }
-
-    .nav-logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
 
     .nav-logo-name {
       font-family: var(--font-serif);
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--white);
-      letter-spacing: .02em;
     }
 
     .nav-logo-tagline {
-      font-size: .65rem;
+      font-size: .6rem;
       font-weight: 500;
-      letter-spacing: .2em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--gold);
     }
 
+    /* Menu desktop */
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 2.2rem;
+      gap: 2rem;
     }
 
     .nav-link {
-      font-size: .82rem;
+      font-size: .8rem;
       font-weight: 500;
       letter-spacing: .08em;
       text-transform: uppercase;
@@ -302,10 +290,8 @@
     .nav-link::after {
       content: '';
       position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1.5px;
+      bottom: -2px; left: 0;
+      width: 0; height: 1.5px;
       background: var(--gold);
       transition: width .3s ease;
     }
@@ -314,16 +300,15 @@
     .nav-link:hover::after { width: 100%; }
 
     .nav-cta {
-      padding: .65rem 1.5rem !important;
-      background: transparent;
+      padding: .6rem 1.35rem !important;
+      background: transparent !important;
       border: 1.5px solid var(--gold) !important;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-sm) !important;
       color: var(--gold) !important;
-      font-size: .78rem !important;
-      font-weight: 600;
-      letter-spacing: .1em !important;
-      text-transform: uppercase;
-      transition: var(--transition);
+      font-size: .76rem !important;
+      font-weight: 600 !important;
+      letter-spacing: .09em !important;
+      white-space: nowrap;
     }
 
     .nav-cta::after { display: none !important; }
@@ -333,67 +318,71 @@
       color: var(--navy-deep) !important;
     }
 
+    /* Toggle hamburger */
     .nav-toggle {
       display: none;
       flex-direction: column;
+      justify-content: center;
       gap: 5px;
       background: none;
       border: none;
       cursor: pointer;
       padding: .5rem;
       z-index: 1001;
+      width: 44px;
+      height: 44px;
     }
 
     .nav-toggle span {
       display: block;
-      width: 24px;
+      width: 22px;
       height: 1.5px;
       background: var(--white);
       transition: var(--transition);
+      transform-origin: center;
+    }
+
+    /* Animação X no toggle */
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Overlay mobile */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 998;
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+
+    .nav-overlay.open {
+      display: block;
+      opacity: 1;
     }
 
     /* ============================================================
-       HERO — CORREÇÕES CRÍTICAS
-       
-       PROBLEMA RAIZ DA REPETIÇÃO:
-       background-attachment: fixed causa bug em iOS e em alguns
-       navegadores que "repetem" o background além do elemento.
-       Solução: usar um <div> filho absoluto como fundo, sem
-       background-attachment: fixed no próprio section.
-       O parallax é feito via JS com translateY controlado,
-       nunca deixando o elemento sair do clip do pai.
+       HERO
     ============================================================ */
     #hero {
       position: relative;
       width: 100%;
       min-height: 100svh;
-      min-height: 100vh; /* fallback */
+      min-height: 100vh;
       display: flex;
       align-items: center;
-
-      /* CRÍTICO: clipar qualquer overflow do filho .hero-bg */
       overflow: hidden;
     }
 
     .hero-bg {
       position: absolute;
-      /* Margem negativa para o parallax ter espaço sem vazar */
-      top: -8%;
-      left: 0;
-      right: 0;
-      /* altura extra para o parallax não revelar borda branca */
-      bottom: -8%;
-
+      top: -8%; left: 0; right: 0; bottom: -8%;
       background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1920&q=85');
       background-size: cover;
       background-position: center 30%;
-      /* SEM background-attachment: fixed — era o causador da repetição */
       will-change: transform;
-      transition: transform 8s ease;
-    }
-
-    #hero.loaded .hero-bg {
-      transform: scale(1);
     }
 
     .hero-overlay {
@@ -401,11 +390,10 @@
       inset: 0;
       background: linear-gradient(
         105deg,
-        rgba(13, 30, 51, .93) 0%,
-        rgba(31, 58, 95, .82) 45%,
-        rgba(46, 46, 46, .68) 100%
+        rgba(13,30,51,.93) 0%,
+        rgba(31,58,95,.82) 45%,
+        rgba(46,46,46,.68) 100%
       );
-      /* z-index acima do hero-bg */
       z-index: 1;
     }
 
@@ -416,105 +404,107 @@
       background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
-    /* Container do hero: z-index acima de todos os pseudo-elementos */
     .hero-content-wrap {
       position: relative;
       z-index: 3;
       width: 100%;
     }
 
-    /*
-      CORREÇÃO DOS BOTÕES DESCENTRALIZADOS:
-      O hero-content ficava com max-width sem margin auto,
-      então alinhava à esquerda no container.
-      Agora o layout é centralizado por padrão,
-      com alinhamento ao centro explícito.
-    */
     .hero-content {
       max-width: 860px;
-      margin: 0 auto;           /* centraliza horizontalmente */
-      padding: 8rem 0 5rem;
-      text-align: center;       /* centraliza todo o texto e botões */
+      margin: 0 auto;
+      padding: 7rem 0 5rem;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      align-items: center;      /* garante centralização dos filhos flex */
+      align-items: center;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: .6rem;
-      padding: .45rem 1.1rem;
+      padding: .4rem 1rem;
       border: 1px solid rgba(200,169,106,.35);
       border-radius: 50px;
       background: rgba(200,169,106,.08);
       backdrop-filter: blur(8px);
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
+      /* mobile: texto menor e quebra controlada */
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .hero-badge span {
-      font-size: .72rem;
+      font-size: .68rem;
       font-weight: 600;
-      letter-spacing: .18em;
+      letter-spacing: .15em;
       text-transform: uppercase;
       color: var(--gold-light);
+      text-align: center;
     }
 
-    .hero-badge i {
-      font-size: .5rem;
-      color: var(--gold);
-    }
+    .hero-badge i { font-size: .45rem; color: var(--gold); flex-shrink: 0; }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.8rem, 6.5vw, 5rem);
+      font-size: clamp(2.4rem, 6vw, 5rem);
       font-weight: 600;
       color: var(--white);
       line-height: 1.12;
       letter-spacing: -.01em;
-      margin-bottom: 1.5rem;
-      /* herda text-align: center do pai */
+      margin-bottom: 1.25rem;
     }
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
 
     .hero-subtitle {
-      font-size: clamp(1rem, 2vw, 1.18rem);
+      font-size: clamp(.95rem, 2.2vw, 1.18rem);
       color: rgba(255,255,255,.75);
       line-height: 1.8;
-      max-width: 600px;
-      margin-bottom: 2.8rem;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
       font-weight: 300;
-      text-align: center;
     }
 
-    /* BOTÕES DO HERO — centralizados */
+    /* Botões hero — empilhados em coluna no mobile por padrão,
+       ficam em linha a partir de 480px */
     .hero-actions {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;  /* centraliza os botões */
+      flex-direction: column;
       align-items: center;
-      margin-bottom: 4rem;
+      gap: .9rem;
+      margin-bottom: 3.5rem;
       width: 100%;
     }
 
+    /* Botões do hero ocupam largura controlada no mobile */
+    .hero-actions .btn {
+      width: 100%;
+      max-width: 340px;
+      white-space: normal;       /* permite quebra de linha se necessário */
+      text-align: center;
+      padding: 1rem 1.5rem;
+      font-size: .83rem;
+      line-height: 1.35;
+    }
+
     .hero-divider {
-      width: min(480px, 100%);
+      width: min(420px, 90%);
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(200,169,106,.4), transparent);
       margin-bottom: 2.5rem;
     }
 
-    /* Estatísticas */
+    /* Stats hero */
     .hero-stats {
-      display: flex;
-      gap: 3.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      /* 2 colunas em mobile, 4 em desktop */
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 2rem;
+      width: 100%;
+      max-width: 480px;
+      justify-items: center;
     }
 
     .hero-stat {
@@ -526,7 +516,7 @@
 
     .hero-stat-number {
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 600;
       color: var(--white);
       line-height: 1;
@@ -535,18 +525,18 @@
     .hero-stat-number span { color: var(--gold); }
 
     .hero-stat-label {
-      font-size: .73rem;
+      font-size: .7rem;
       font-weight: 500;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       text-transform: uppercase;
       color: rgba(255,255,255,.5);
-      margin-top: .35rem;
+      margin-top: .3rem;
     }
 
-    /* Scroll indicator */
+    /* Indicador de scroll */
     .hero-scroll {
       position: absolute;
-      bottom: 2.5rem;
+      bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
@@ -562,17 +552,17 @@
     .hero-scroll:hover { opacity: 1; }
 
     .hero-scroll span {
-      font-size: .65rem;
+      font-size: .62rem;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--white);
     }
 
     .scroll-mouse {
-      width: 22px;
-      height: 36px;
+      width: 20px;
+      height: 32px;
       border: 1.5px solid rgba(255,255,255,.4);
-      border-radius: 12px;
+      border-radius: 10px;
       position: relative;
     }
 
@@ -583,7 +573,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 3px;
-      height: 7px;
+      height: 6px;
       background: var(--gold);
       border-radius: 2px;
       animation: scrollDot 1.6s ease infinite;
@@ -591,7 +581,7 @@
 
     @keyframes scrollDot {
       0%   { opacity: 1; top: 5px; }
-      100% { opacity: 0; top: 18px; }
+      100% { opacity: 0; top: 16px; }
     }
 
     /* ============================================================
@@ -600,32 +590,31 @@
     #trust-bar {
       background: var(--navy-deep);
       border-bottom: 1px solid rgba(200,169,106,.12);
-      padding: 1.4rem 0;
+      padding: 1.2rem 0;
     }
 
     .trust-bar-inner {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 2.5rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
     .trust-item {
       display: flex;
       align-items: center;
-      gap: .65rem;
+      gap: .55rem;
       color: rgba(255,255,255,.6);
-      font-size: .8rem;
+      font-size: .78rem;
       font-weight: 500;
-      letter-spacing: .04em;
     }
 
-    .trust-item i { color: var(--gold); font-size: .9rem; }
+    .trust-item i { color: var(--gold); font-size: .85rem; }
 
     .trust-sep {
       width: 1px;
-      height: 18px;
+      height: 16px;
       background: rgba(255,255,255,.12);
       flex-shrink: 0;
     }
@@ -634,33 +623,21 @@
        SOBRE
     ============================================================ */
     #sobre {
-      padding: 9rem 0;
+      padding: 6rem 0;
       background: var(--white);
       position: relative;
-    }
-
-    #sobre::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(200,169,106,.055) 0%, transparent 70%);
-      pointer-events: none;
     }
 
     .sobre-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      gap: 5rem;
       align-items: center;
     }
 
     .sobre-visual { position: relative; }
 
     .sobre-img-wrap {
-      position: relative;
       border-radius: var(--radius-md);
       overflow: hidden;
       box-shadow: var(--shadow-lg);
@@ -668,7 +645,7 @@
 
     .sobre-img-wrap img {
       width: 100%;
-      height: 520px;
+      height: 480px;
       object-fit: cover;
       display: block;
       transition: transform .5s ease;
@@ -678,18 +655,18 @@
 
     .sobre-card-float {
       position: absolute;
-      bottom: -2rem;
-      right: -2rem;
+      bottom: -1.5rem;
+      right: -1.5rem;
       background: var(--navy);
       border-radius: var(--radius-md);
-      padding: 1.5rem 2rem;
+      padding: 1.25rem 1.75rem;
       box-shadow: var(--shadow-lg);
-      min-width: 200px;
+      min-width: 180px;
     }
 
     .sobre-card-float-number {
       font-family: var(--font-serif);
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       font-weight: 600;
       color: var(--white);
       line-height: 1;
@@ -698,11 +675,11 @@
     .sobre-card-float-number span { color: var(--gold); }
 
     .sobre-card-float-label {
-      font-size: .75rem;
-      letter-spacing: .12em;
+      font-size: .72rem;
+      letter-spacing: .1em;
       text-transform: uppercase;
       color: rgba(255,255,255,.55);
-      margin-top: .4rem;
+      margin-top: .35rem;
     }
 
     .sobre-gold-bar {
@@ -710,7 +687,7 @@
       top: 2rem;
       left: -1rem;
       width: 4px;
-      height: 80px;
+      height: 70px;
       background: linear-gradient(to bottom, var(--gold), transparent);
       border-radius: 2px;
     }
@@ -718,20 +695,20 @@
     .sobre-valores {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      margin-top: 2.5rem;
+      gap: 1rem;
+      margin-top: 2rem;
     }
 
     .sobre-valor {
       display: flex;
       align-items: flex-start;
-      gap: .85rem;
+      gap: .75rem;
     }
 
     .sobre-valor-icon {
       flex-shrink: 0;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: rgba(200,169,106,.1);
       border: 1px solid rgba(200,169,106,.25);
@@ -739,58 +716,47 @@
       align-items: center;
       justify-content: center;
       color: var(--gold);
-      font-size: .85rem;
-      margin-top: .1rem;
+      font-size: .82rem;
     }
 
     .sobre-valor h4 {
       font-family: var(--font-serif);
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--navy);
-      margin-bottom: .2rem;
+      margin-bottom: .15rem;
     }
 
     .sobre-valor p {
-      font-size: .85rem;
+      font-size: .83rem;
       color: var(--gray-600);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     /* ============================================================
-       ÁREAS DE ATUAÇÃO
+       ÁREAS
     ============================================================ */
     #areas {
-      padding: 9rem 0;
+      padding: 6rem 0;
       background: var(--off-white);
       position: relative;
     }
 
-    #areas::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,169,106,.3), transparent);
-    }
-
     .areas-header {
       text-align: center;
-      margin-bottom: 5rem;
+      margin-bottom: 4rem;
     }
 
     .areas-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
+      gap: 1.5rem;
     }
 
     .area-card {
       background: var(--white);
       border-radius: var(--radius-md);
-      padding: 2.8rem 2.2rem;
+      padding: 2.4rem 2rem;
       border: 1px solid var(--gray-200);
       transition: var(--transition);
       position: relative;
@@ -800,10 +766,8 @@
     .area-card::before {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
       background: linear-gradient(90deg, var(--gold), var(--gold-dark));
       transform: scaleX(0);
       transform-origin: left;
@@ -811,7 +775,7 @@
     }
 
     .area-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
       border-color: transparent;
     }
@@ -819,46 +783,46 @@
     .area-card:hover::before { transform: scaleX(1); }
 
     .area-card-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, rgba(31,58,95,.08), rgba(31,58,95,.04));
+      width: 52px;
+      height: 52px;
+      background: rgba(31,58,95,.07);
       border: 1px solid rgba(31,58,95,.12);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--navy);
-      font-size: 1.3rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      margin-bottom: 1.3rem;
       transition: var(--transition);
     }
 
     .area-card:hover .area-card-icon {
-      background: linear-gradient(135deg, rgba(200,169,106,.12), rgba(200,169,106,.06));
+      background: rgba(200,169,106,.1);
       border-color: rgba(200,169,106,.3);
       color: var(--gold-dark);
     }
 
     .area-card h3 {
       font-family: var(--font-serif);
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: var(--navy);
-      margin-bottom: .9rem;
+      margin-bottom: .75rem;
     }
 
     .area-card p {
-      font-size: .9rem;
+      font-size: .88rem;
       color: var(--gray-600);
       line-height: 1.75;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.3rem;
     }
 
     .area-card-link {
       display: inline-flex;
       align-items: center;
-      gap: .45rem;
-      font-size: .8rem;
+      gap: .4rem;
+      font-size: .78rem;
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
@@ -866,8 +830,7 @@
       transition: var(--transition-fast);
     }
 
-    .area-card-link i { font-size: .7rem; transition: transform .2s; }
-
+    .area-card-link i { font-size: .68rem; transition: transform .2s; }
     .area-card:hover .area-card-link { color: var(--gold-dark); }
     .area-card:hover .area-card-link i { transform: translateX(4px); }
 
@@ -875,7 +838,7 @@
        DIFERENCIAIS
     ============================================================ */
     #diferenciais {
-      padding: 9rem 0;
+      padding: 6rem 0;
       background: var(--navy-deep);
       position: relative;
       overflow: hidden;
@@ -883,10 +846,8 @@
 
     .diferenciais-bg-shape {
       position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 500px;
-      height: 500px;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(200,169,106,.06) 0%, transparent 70%);
       pointer-events: none;
@@ -894,24 +855,21 @@
 
     .diferenciais-header {
       text-align: center;
-      margin-bottom: 5rem;
+      margin-bottom: 4rem;
     }
 
     .diferenciais-header .section-title { color: var(--white); }
-    .diferenciais-header .section-subtitle {
-      color: rgba(255,255,255,.55);
-      margin: 0 auto;
-    }
+    .diferenciais-header .section-subtitle { color: rgba(255,255,255,.55); margin: 0 auto; }
 
     .diferenciais-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
     .diferencial-item {
       text-align: center;
-      padding: 2.8rem 1.8rem;
+      padding: 2.5rem 1.5rem;
       border: 1px solid rgba(255,255,255,.07);
       border-radius: var(--radius-md);
       background: rgba(255,255,255,.03);
@@ -929,16 +887,11 @@
       transition: opacity .35s;
     }
 
-    .diferencial-item:hover {
-      border-color: rgba(200,169,106,.2);
-      transform: translateY(-4px);
-    }
-
+    .diferencial-item:hover { border-color: rgba(200,169,106,.2); transform: translateY(-4px); }
     .diferencial-item:hover::before { opacity: 1; }
 
     .diferencial-icon {
-      width: 68px;
-      height: 68px;
+      width: 64px; height: 64px;
       border-radius: 50%;
       background: rgba(200,169,106,.1);
       border: 1px solid rgba(200,169,106,.2);
@@ -946,26 +899,26 @@
       align-items: center;
       justify-content: center;
       color: var(--gold);
-      font-size: 1.5rem;
-      margin: 0 auto 1.5rem;
+      font-size: 1.4rem;
+      margin: 0 auto 1.3rem;
       transition: var(--transition);
     }
 
     .diferencial-item:hover .diferencial-icon {
       background: rgba(200,169,106,.18);
-      box-shadow: 0 0 30px rgba(200,169,106,.2);
+      box-shadow: 0 0 28px rgba(200,169,106,.2);
     }
 
     .diferencial-item h3 {
       font-family: var(--font-serif);
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--white);
-      margin-bottom: .8rem;
+      margin-bottom: .75rem;
     }
 
     .diferencial-item p {
-      font-size: .875rem;
+      font-size: .85rem;
       color: rgba(255,255,255,.5);
       line-height: 1.75;
     }
@@ -974,7 +927,7 @@
        NÚMEROS
     ============================================================ */
     #numeros {
-      padding: 7rem 0;
+      padding: 5rem 0;
       background: var(--white);
       border-top: 1px solid var(--gray-200);
       border-bottom: 1px solid var(--gray-200);
@@ -983,22 +936,20 @@
     .numeros-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
+      gap: 1.5rem;
       text-align: center;
     }
 
     .numero-item {
-      padding: 2.5rem 1.5rem;
+      padding: 2rem 1rem;
       position: relative;
     }
 
     .numero-item::after {
       content: '';
       position: absolute;
-      right: 0;
-      top: 20%;
-      height: 60%;
-      width: 1px;
+      right: 0; top: 20%;
+      height: 60%; width: 1px;
       background: var(--gray-200);
     }
 
@@ -1006,19 +957,19 @@
 
     .numero-value {
       font-family: var(--font-serif);
-      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 700;
       color: var(--navy);
       line-height: 1;
-      margin-bottom: .5rem;
+      margin-bottom: .4rem;
     }
 
     .numero-value span { color: var(--gold); }
 
     .numero-label {
-      font-size: .8rem;
+      font-size: .76rem;
       font-weight: 600;
-      letter-spacing: .1em;
+      letter-spacing: .09em;
       text-transform: uppercase;
       color: var(--gray-400);
     }
@@ -1027,25 +978,22 @@
        DEPOIMENTOS
     ============================================================ */
     #depoimentos {
-      padding: 9rem 0;
+      padding: 6rem 0;
       background: var(--off-white);
     }
 
-    .depoimentos-header {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
+    .depoimentos-header { text-align: center; margin-bottom: 4rem; }
 
     .depoimentos-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .depoimento-card {
       background: var(--white);
       border-radius: var(--radius-md);
-      padding: 2.5rem;
+      padding: 2.2rem;
       border: 1px solid var(--gray-200);
       transition: var(--transition);
     }
@@ -1057,40 +1005,34 @@
 
     .depoimento-quote {
       color: var(--gold);
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-family: Georgia, serif;
       line-height: 1;
-      margin-bottom: 1rem;
+      margin-bottom: .75rem;
       opacity: .6;
     }
 
-    .depoimento-stars {
-      display: flex;
-      gap: .25rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .depoimento-stars i { color: var(--gold); font-size: .8rem; }
+    .depoimento-stars { display: flex; gap: .25rem; margin-bottom: 1rem; }
+    .depoimento-stars i { color: var(--gold); font-size: .78rem; }
 
     .depoimento-text {
-      font-size: .93rem;
+      font-size: .9rem;
       color: var(--gray-600);
-      line-height: 1.85;
-      margin-bottom: 2rem;
+      line-height: 1.8;
+      margin-bottom: 1.75rem;
       font-style: italic;
     }
 
     .depoimento-author {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding-top: 1.5rem;
+      gap: .85rem;
+      padding-top: 1.25rem;
       border-top: 1px solid var(--gray-200);
     }
 
     .depoimento-avatar {
-      width: 44px;
-      height: 44px;
+      width: 42px; height: 42px;
       border-radius: 50%;
       background: var(--navy);
       border: 2px solid var(--gold);
@@ -1099,54 +1041,46 @@
       justify-content: center;
       color: var(--white);
       font-family: var(--font-serif);
-      font-size: 1rem;
+      font-size: .95rem;
       font-weight: 600;
       flex-shrink: 0;
     }
 
     .depoimento-author-info h4 {
       font-family: var(--font-serif);
-      font-size: 1rem;
+      font-size: .95rem;
       font-weight: 600;
       color: var(--navy);
     }
 
-    .depoimento-author-info span {
-      font-size: .78rem;
-      color: var(--gray-400);
-    }
+    .depoimento-author-info span { font-size: .76rem; color: var(--gray-400); }
 
     /* ============================================================
        EQUIPE
     ============================================================ */
-    #equipe {
-      padding: 9rem 0;
-      background: var(--white);
-    }
+    #equipe { padding: 6rem 0; background: var(--white); }
 
-    .equipe-header {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
+    .equipe-header { text-align: center; margin-bottom: 4rem; }
 
     .equipe-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
+      gap: 2rem;
     }
 
-    .equipe-card { text-align: center; transition: var(--transition); }
+    .equipe-card { text-align: center; }
 
     .equipe-img-wrap {
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-md);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .equipe-img-wrap img {
       width: 100%;
-      height: 360px;
+      /* altura responsiva — não fixar px demais */
+      aspect-ratio: 3 / 4;
       object-fit: cover;
       object-position: top;
       transition: transform .5s ease;
@@ -1164,18 +1098,17 @@
       background: linear-gradient(to top, rgba(15,27,45,.85) 0%, transparent 55%);
       display: flex;
       align-items: flex-end;
-      padding: 1.5rem;
+      padding: 1.25rem;
       opacity: 0;
       transition: opacity .35s;
     }
 
     .equipe-card:hover .equipe-overlay { opacity: 1; }
 
-    .equipe-social { display: flex; gap: .6rem; }
+    .equipe-social { display: flex; gap: .5rem; }
 
     .equipe-social a {
-      width: 34px;
-      height: 34px;
+      width: 32px; height: 32px;
       border-radius: 50%;
       background: rgba(255,255,255,.15);
       border: 1px solid rgba(255,255,255,.25);
@@ -1183,7 +1116,7 @@
       align-items: center;
       justify-content: center;
       color: var(--white);
-      font-size: .8rem;
+      font-size: .78rem;
       transition: var(--transition-fast);
     }
 
@@ -1195,32 +1128,28 @@
 
     .equipe-card h3 {
       font-family: var(--font-serif);
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--navy);
-      margin-bottom: .3rem;
+      margin-bottom: .25rem;
     }
 
     .equipe-card-role {
-      font-size: .78rem;
+      font-size: .75rem;
       font-weight: 600;
-      letter-spacing: .12em;
+      letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--gold-dark);
-      margin-bottom: .8rem;
+      margin-bottom: .65rem;
     }
 
-    .equipe-card p {
-      font-size: .87rem;
-      color: var(--gray-600);
-      line-height: 1.7;
-    }
+    .equipe-card p { font-size: .85rem; color: var(--gray-600); line-height: 1.65; }
 
     /* ============================================================
        CTA
     ============================================================ */
     #cta {
-      padding: 8rem 0;
+      padding: 6rem 0;
       background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 50%, var(--charcoal) 100%);
       position: relative;
       overflow: hidden;
@@ -1236,39 +1165,48 @@
 
     .cta-glow {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 300px;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 600px; height: 300px;
       background: radial-gradient(ellipse, rgba(200,169,106,.1) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .cta-content { position: relative; z-index: 1; }
+
     .cta-content .section-title {
       color: var(--white);
-      margin-bottom: 1.2rem;
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      margin-bottom: 1rem;
+      font-size: clamp(1.75rem, 4.5vw, 3rem);
     }
 
     .cta-content .section-subtitle {
       color: rgba(255,255,255,.6);
-      margin: 0 auto 3rem;
+      margin: 0 auto 2.5rem;
     }
 
     .cta-actions {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      flex-direction: column;
+      align-items: center;
+      gap: .9rem;
+    }
+
+    /* Botões CTA mesma regra dos hero-actions */
+    .cta-actions .btn {
+      width: 100%;
+      max-width: 340px;
+      white-space: normal;
+      text-align: center;
+      padding: 1rem 1.5rem;
+      font-size: .83rem;
+      line-height: 1.35;
     }
 
     .cta-note {
-      margin-top: 2rem;
-      font-size: .8rem;
+      margin-top: 1.75rem;
+      font-size: .78rem;
       color: rgba(255,255,255,.35);
-      letter-spacing: .06em;
     }
 
     .cta-note i { color: var(--gold); margin-right: .3rem; }
@@ -1276,34 +1214,26 @@
     /* ============================================================
        CONTATO
     ============================================================ */
-    #contato {
-      padding: 9rem 0;
-      background: var(--white);
-    }
+    #contato { padding: 6rem 0; background: var(--white); }
 
     .contato-grid {
       display: grid;
       grid-template-columns: 1fr 1.4fr;
-      gap: 6rem;
+      gap: 5rem;
       align-items: start;
     }
 
     .contato-items {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 2rem;
+      gap: 1.3rem;
+      margin-top: 1.75rem;
     }
 
-    .contato-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
+    .contato-item { display: flex; align-items: flex-start; gap: .9rem; }
 
     .contato-item-icon {
-      width: 44px;
-      height: 44px;
+      width: 42px; height: 42px;
       flex-shrink: 0;
       border-radius: var(--radius-sm);
       background: rgba(31,58,95,.07);
@@ -1312,21 +1242,21 @@
       align-items: center;
       justify-content: center;
       color: var(--navy);
-      font-size: .95rem;
+      font-size: .9rem;
     }
 
     .contato-item h4 {
-      font-size: .75rem;
+      font-size: .72rem;
       font-weight: 700;
-      letter-spacing: .12em;
+      letter-spacing: .11em;
       text-transform: uppercase;
       color: var(--gold-dark);
-      margin-bottom: .2rem;
+      margin-bottom: .15rem;
     }
 
     .contato-item p,
     .contato-item a {
-      font-size: .93rem;
+      font-size: .9rem;
       color: var(--text-body);
       line-height: 1.6;
       transition: color .2s;
@@ -1337,39 +1267,39 @@
     .contato-form {
       background: var(--off-white);
       border-radius: var(--radius-lg);
-      padding: 3rem;
+      padding: 2.5rem;
       border: 1px solid var(--gray-200);
     }
 
     .contato-form h3 {
       font-family: var(--font-serif);
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 600;
       color: var(--navy);
-      margin-bottom: .5rem;
+      margin-bottom: .4rem;
     }
 
     .contato-form-subtitle {
-      font-size: .88rem;
+      font-size: .86rem;
       color: var(--gray-600);
-      margin-bottom: 2.2rem;
+      margin-bottom: 2rem;
     }
 
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      gap: .85rem;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: .45rem;
-      margin-bottom: 1.2rem;
+      gap: .4rem;
+      margin-bottom: 1rem;
     }
 
     .form-group label {
-      font-size: .78rem;
+      font-size: .75rem;
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
@@ -1380,11 +1310,11 @@
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: .85rem 1.1rem;
+      padding: .8rem 1rem;
       border: 1.5px solid var(--gray-200);
       border-radius: var(--radius-sm);
       font-family: var(--font-sans);
-      font-size: .92rem;
+      font-size: .9rem;
       color: var(--text-dark);
       background: var(--white);
       transition: var(--transition-fast);
@@ -1402,36 +1332,30 @@
       box-shadow: 0 0 0 3px rgba(31,58,95,.08);
     }
 
-    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
 
-    .form-submit {
-      width: 100%;
-      padding: 1rem;
-      font-size: .9rem;
-      justify-content: center;
-    }
+    .form-submit { width: 100%; padding: .95rem; font-size: .88rem; justify-content: center; }
 
     .form-privacy {
       text-align: center;
-      margin-top: 1rem;
-      font-size: .78rem;
+      margin-top: .9rem;
+      font-size: .76rem;
       color: var(--gray-400);
     }
 
     .form-privacy i { color: var(--gold); margin-right: .3rem; }
 
     /* ============================================================
-       RODAPÉ — position garante que é o ÚLTIMO elemento
+       RODAPÉ
     ============================================================ */
     #footer {
       background: var(--navy-deep);
       color: var(--white);
-      /* Empurra o footer para o fim do flex body */
       margin-top: auto;
     }
 
     .footer-awards {
-      padding: 2rem 0;
+      padding: 1.75rem 0;
       border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
@@ -1439,93 +1363,78 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 3rem;
+      gap: 2.5rem;
       flex-wrap: wrap;
     }
 
     .footer-award {
       display: flex;
       align-items: center;
-      gap: .75rem;
+      gap: .65rem;
       color: rgba(255,255,255,.3);
-      font-size: .8rem;
+      font-size: .78rem;
       font-weight: 500;
-      letter-spacing: .06em;
     }
 
-    .footer-award i {
-      font-size: 1.2rem;
-      color: var(--gold);
-      opacity: .6;
-    }
+    .footer-award i { font-size: 1.1rem; color: var(--gold); opacity: .6; }
 
     .footer-top {
-      padding: 5rem 0 4rem;
+      padding: 4.5rem 0 3.5rem;
       border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
     .footer-grid {
       display: grid;
       grid-template-columns: 1.6fr 1fr 1fr 1fr;
-      gap: 4rem;
+      gap: 3rem;
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: .85rem;
-      margin-bottom: 1.5rem;
-    }
+    .footer-brand { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.25rem; }
 
     .footer-logo-icon {
-      width: 44px;
-      height: 44px;
+      width: 40px; height: 40px;
       border: 1.5px solid var(--gold);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--gold);
-      font-size: 1rem;
+      font-size: .9rem;
       flex-shrink: 0;
     }
 
     .footer-logo-name {
       font-family: var(--font-serif);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--white);
     }
 
     .footer-logo-tagline {
-      font-size: .62rem;
-      letter-spacing: .2em;
+      font-size: .6rem;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--gold);
     }
 
     .footer-about {
-      font-size: .87rem;
+      font-size: .85rem;
       color: rgba(255,255,255,.45);
-      line-height: 1.85;
-      margin-bottom: 2rem;
+      line-height: 1.8;
+      margin-bottom: 1.75rem;
     }
 
-    .footer-social {
-      display: flex;
-      gap: .75rem;
-    }
+    .footer-social { display: flex; gap: .65rem; }
 
     .footer-social a {
-      width: 36px;
-      height: 36px;
+      width: 34px; height: 34px;
       border-radius: 50%;
       border: 1px solid rgba(255,255,255,.12);
       display: flex;
       align-items: center;
       justify-content: center;
       color: rgba(255,255,255,.5);
-      font-size: .85rem;
+      font-size: .82rem;
       transition: var(--transition-fast);
     }
 
@@ -1536,65 +1445,56 @@
     }
 
     .footer-col h4 {
-      font-size: .72rem;
+      font-size: .7rem;
       font-weight: 700;
-      letter-spacing: .2em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.3rem;
     }
 
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: .85rem;
-    }
+    .footer-links { display: flex; flex-direction: column; gap: .75rem; }
 
     .footer-links a {
-      font-size: .87rem;
+      font-size: .85rem;
       color: rgba(255,255,255,.45);
       transition: color .2s;
       display: flex;
       align-items: center;
-      gap: .5rem;
+      gap: .45rem;
     }
 
     .footer-links a::before {
       content: '';
       display: block;
-      width: 12px;
-      height: 1px;
+      width: 12px; height: 1px;
       background: var(--gold);
       opacity: .5;
-      transition: opacity .2s, width .2s;
       flex-shrink: 0;
+      transition: opacity .2s, width .2s;
     }
 
     .footer-links a:hover { color: var(--white); }
     .footer-links a:hover::before { opacity: 1; width: 18px; }
 
-    .footer-contact-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    .footer-contact-list { display: flex; flex-direction: column; gap: .9rem; }
 
     .footer-contact-item {
       display: flex;
       align-items: flex-start;
-      gap: .75rem;
-      font-size: .87rem;
+      gap: .7rem;
+      font-size: .85rem;
       color: rgba(255,255,255,.45);
     }
 
     .footer-contact-item i {
       color: var(--gold);
-      font-size: .85rem;
-      margin-top: .15rem;
+      font-size: .82rem;
+      margin-top: .18rem;
       flex-shrink: 0;
     }
 
-    .footer-bottom { padding: 1.8rem 0; }
+    .footer-bottom { padding: 1.6rem 0; }
 
     .footer-bottom-inner {
       display: flex;
@@ -1604,47 +1504,40 @@
       flex-wrap: wrap;
     }
 
-    .footer-bottom p {
-      font-size: .8rem;
-      color: rgba(255,255,255,.3);
-    }
+    .footer-bottom p { font-size: .78rem; color: rgba(255,255,255,.3); }
 
-    .footer-bottom a {
-      color: rgba(255,255,255,.4);
-      transition: color .2s;
-    }
-
+    .footer-bottom a { color: rgba(255,255,255,.4); transition: color .2s; }
     .footer-bottom a:hover { color: var(--gold); }
 
-    .footer-bottom-links { display: flex; gap: 2rem; }
+    .footer-bottom-links { display: flex; gap: 1.75rem; }
 
     /* ============================================================
        WHATSAPP FLOAT
     ============================================================ */
     .whatsapp-float {
       position: fixed;
-      bottom: 2.2rem;
-      right: 2.2rem;
+      bottom: 1.75rem;
+      right: 1.75rem;
       z-index: 999;
       display: flex;
       align-items: center;
-      gap: .75rem;
+      gap: .7rem;
       background: #25D366;
       color: var(--white);
-      padding: .85rem 1.4rem .85rem 1rem;
+      padding: .85rem 1.3rem .85rem .95rem;
       border-radius: 50px;
-      box-shadow: 0 6px 28px rgba(37,211,102,.35);
-      font-size: .85rem;
+      box-shadow: 0 6px 24px rgba(37,211,102,.35);
+      font-size: .83rem;
       font-weight: 600;
-      letter-spacing: .03em;
+      letter-spacing: .02em;
       transition: var(--transition);
     }
 
-    .whatsapp-float i { font-size: 1.3rem; }
+    .whatsapp-float i { font-size: 1.25rem; flex-shrink: 0; }
 
     .whatsapp-float:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 40px rgba(37,211,102,.45);
+      box-shadow: 0 10px 36px rgba(37,211,102,.45);
       color: var(--white);
     }
 
@@ -1653,11 +1546,10 @@
     ============================================================ */
     #scrollTop {
       position: fixed;
-      bottom: 2.2rem;
-      left: 2.2rem;
+      bottom: 1.75rem;
+      left: 1.75rem;
       z-index: 999;
-      width: 44px;
-      height: 44px;
+      width: 42px; height: 42px;
       background: var(--navy);
       border: 1px solid rgba(200,169,106,.3);
       border-radius: 50%;
@@ -1665,7 +1557,7 @@
       align-items: center;
       justify-content: center;
       color: var(--gold);
-      font-size: .9rem;
+      font-size: .88rem;
       cursor: pointer;
       opacity: 0;
       pointer-events: none;
@@ -1682,12 +1574,12 @@
     }
 
     /* ============================================================
-       ANIMAÇÕES FADE UP
+       FADE UP
     ============================================================ */
     .fade-up {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease;
+      transform: translateY(26px);
+      transition: opacity .65s ease, transform .65s ease;
     }
 
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -1698,118 +1590,329 @@
     .fade-up-delay-4 { transition-delay: .4s; }
 
     /* ============================================================
-       RESPONSIVO
+       ██████████  RESPONSIVO MOBILE-FIRST  ██████████
+       Todos os breakpoints revisados e testados
     ============================================================ */
+
+    /* ── 1024px: tablet paisagem ── */
     @media (max-width: 1024px) {
       .areas-grid        { grid-template-columns: repeat(2, 1fr); }
       .diferenciais-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid       { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
       .sobre-grid        { gap: 3rem; }
+      .contato-grid      { gap: 3rem; }
     }
 
+    /* ── 768px: tablet retrato / mobile grande ── */
     @media (max-width: 768px) {
-      /* Menu mobile */
+
+      /* Padding de seções menor */
+      #sobre, #areas, #diferenciais,
+      #depoimentos, #equipe, #cta, #contato { padding: 4.5rem 0; }
+      #numeros { padding: 3.5rem 0; }
+
+      /* --- NAVBAR MOBILE --- */
       .nav-menu {
         position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        max-width: 340px;
-        height: 100svh;
+        top: 0; right: -100%;
+        width: min(85%, 320px);
+        height: 100dvh;
+        height: 100vh; /* fallback */
         background: var(--navy-deep);
         flex-direction: column;
         align-items: flex-start;
-        padding: 6rem 2.5rem 3rem;
-        gap: 2rem;
+        /* espaço para o logo não sobrepor */
+        padding: 5.5rem 2rem 2.5rem;
+        gap: .25rem;
         transition: right .4s cubic-bezier(.4,0,.2,1);
         border-left: 1px solid rgba(200,169,106,.1);
-        box-shadow: -20px 0 60px rgba(0,0,0,.4);
+        box-shadow: -20px 0 60px rgba(0,0,0,.45);
         z-index: 999;
         overflow-y: auto;
       }
 
       .nav-menu.open { right: 0; }
-      .nav-link { font-size: 1rem; color: rgba(255,255,255,.85); }
 
-      .nav-cta {
+      /* Links maiores e mais confortáveis no mobile */
+      .nav-menu .nav-link {
+        font-size: .9rem;
+        color: rgba(255,255,255,.82);
+        padding: .85rem 0;
         width: 100%;
-        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,.05);
+        letter-spacing: .06em;
+      }
+
+      .nav-menu .nav-link::after { display: none; }
+
+      /* CTA dentro do menu mobile */
+      .nav-menu .nav-cta {
+        margin-top: 1rem;
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center;
+        display: flex;
+        padding: .85rem 1rem !important;
+        font-size: .82rem !important;
+        border-color: var(--gold) !important;
+        color: var(--gold) !important;
+        background: transparent !important;
+        border-radius: var(--radius-sm) !important;
       }
 
       .nav-toggle { display: flex; }
 
-      .nav-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,.6);
-        z-index: 998;
+      /* --- SOBRE --- */
+      .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
 
-      .nav-overlay.open { display: block; }
+      .sobre-gold-bar { display: none; }
 
-      /* Hero mobile: manter centralização */
-      .hero-content { padding: 7rem 0 4rem; }
-      .hero-stats   { gap: 2rem; }
+      /* Imagem sobre: altura proporcional, não cortada */
+      .sobre-img-wrap img { height: auto; aspect-ratio: 4/3; }
 
-      .sobre-grid       { grid-template-columns: 1fr; }
-      .sobre-card-float { right: 0; bottom: -1.5rem; }
-      .sobre-gold-bar   { display: none; }
+      /* Card flutuante: tira o position absolute no mobile */
+      .sobre-card-float {
+        position: static;
+        margin-top: 1rem;
+        display: inline-flex;
+        flex-direction: column;
+        border-radius: var(--radius-md);
+        width: auto;
+      }
 
-      .areas-grid        { grid-template-columns: 1fr; }
+      .sobre-valores { grid-template-columns: 1fr; }
+
+      /* --- ÁREAS --- */
+      .areas-grid { grid-template-columns: 1fr; }
+
+      /* --- DIFERENCIAIS --- */
       .diferenciais-grid { grid-template-columns: 1fr 1fr; }
 
-      .numeros-grid      { grid-template-columns: repeat(2, 1fr); }
+      /* --- NÚMEROS --- */
+      .numeros-grid { grid-template-columns: repeat(2, 1fr); }
       .numero-item::after { display: none; }
 
-      .depoimentos-grid  { grid-template-columns: 1fr; }
-      .equipe-grid       { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      /* Borda entre os pares de stats */
+      .numero-item:nth-child(1),
+      .numero-item:nth-child(2) {
+        border-bottom: 1px solid var(--gray-200);
+        padding-bottom: 1.75rem;
+      }
 
-      .contato-grid  { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-grid   { grid-template-columns: 1fr; }
+      /* --- DEPOIMENTOS --- */
+      .depoimentos-grid { grid-template-columns: 1fr; }
 
-      .trust-bar-inner { gap: 1.5rem; }
-      .trust-sep       { display: none; }
+      /* --- EQUIPE ---
+         Carrossel horizontal com scroll snap */
+      .equipe-grid {
+        grid-template-columns: repeat(3, 85vw);
+        grid-template-rows: auto;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        /* esconde scrollbar mas mantém funcional */
+        scrollbar-width: none;
+      }
 
+      .equipe-grid::-webkit-scrollbar { display: none; }
+
+      .equipe-card {
+        scroll-snap-align: center;
+        min-width: 0; /* evita overflow do grid item */
+      }
+
+      /* Imagem equipe proporcional */
+      .equipe-img-wrap img {
+        aspect-ratio: 3/4;
+        height: auto;
+      }
+
+      /* --- CONTATO --- */
+      .contato-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      /* --- TRUST BAR --- */
+      .trust-bar-inner { gap: 1rem; }
+      .trust-sep { display: none; }
+
+      /* --- FORM --- */
       .form-row { grid-template-columns: 1fr; }
 
-      .footer-bottom-inner { flex-direction: column; text-align: center; }
-      .footer-bottom-links { flex-direction: column; gap: 1rem; align-items: center; }
+      /* --- FOOTER --- */
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
 
-      /* WhatsApp mobile: só ícone */
-      .whatsapp-float .wa-label { display: none; }
+      .footer-awards-inner { gap: 1.5rem; }
+
+      .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: .75rem;
+      }
+
+      .footer-bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      /* --- WHATSAPP: só ícone no mobile --- */
       .whatsapp-float {
         padding: 1rem;
         border-radius: 50%;
-        width: 54px;
-        height: 54px;
+        width: 52px;
+        height: 52px;
         justify-content: center;
+        right: 1.25rem;
+        bottom: 1.25rem;
       }
+
+      .whatsapp-float .wa-label { display: none; }
+
+      /* --- SCROLL TOP --- */
+      #scrollTop { left: 1.25rem; bottom: 1.25rem; }
     }
 
-    @media (max-width: 480px) {
+    /* ── 600px: mobile médio ── */
+    @media (max-width: 600px) {
+
+      /* Hero: padding top maior por causa da navbar */
+      .hero-content { padding: 6.5rem 0 4rem; }
+
+      /* Stats do hero: já é 2 colunas, ok */
+
+      /* Botões hero: full width, empilhados (já definido acima) */
+
+      /* Trust bar: só 2 itens por linha */
+      .trust-bar-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .85rem;
+        justify-items: center;
+      }
+
+      /* Diferenciais: 1 coluna */
       .diferenciais-grid { grid-template-columns: 1fr; }
 
-      /* Botões do hero em coluna no mobile */
-      .hero-actions {
-        flex-direction: column;
-        align-items: center;
+      /* Equipe carrossel: card quase full width */
+      .equipe-grid {
+        grid-template-columns: repeat(3, 92vw);
       }
 
-      .hero-actions .btn { width: 100%; max-width: 320px; }
-
-      .cta-actions           { flex-direction: column; align-items: center; }
-      .cta-actions .btn      { width: 100%; max-width: 320px; }
-      .contato-form          { padding: 2rem 1.5rem; }
-      .sobre-card-float      { position: static; margin-top: 1.5rem; }
+      /* Footer awards: 2 colunas */
+      .footer-awards-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        justify-items: center;
+      }
     }
+
+    /* ── 480px: mobile pequeno ── */
+    @media (max-width: 480px) {
+
+      /* Padding lateral do container menor */
+      .container { padding: 0 1.1rem; }
+
+      /* Navbar */
+      .nav-logo-name { font-size: 1rem; }
+      .nav-logo-tagline { display: none; }
+      .nav-logo-icon { width: 34px; height: 34px; font-size: .82rem; }
+
+      /* Hero */
+      .hero-content { padding: 6rem 0 3.5rem; }
+
+      .hero-badge span { letter-spacing: .1em; font-size: .64rem; }
+
+      /* Stats hero: 2×2 mais compacto */
+      .hero-stats { gap: 1.2rem 1.5rem; }
+      .hero-stat-number { font-size: 1.75rem; }
+
+      /* Divider menor */
+      .hero-divider { margin-bottom: 1.75rem; }
+
+      /* Números */
+      .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+      .numero-value { font-size: 2rem; }
+
+      /* Contato form */
+      .contato-form { padding: 1.75rem 1.25rem; }
+
+      /* CTA botões já estão em coluna */
+
+      /* Footer */
+      .footer-top { padding: 3rem 0 2.5rem; }
+      .footer-awards { padding: 1.25rem 0; }
+
+      /* Sobre card float: centralizado */
+      .sobre-card-float {
+        margin: 1rem auto 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* ── 380px: mobile muito pequeno (Galaxy S series) ── */
+    @media (max-width: 380px) {
+      .hero-title { font-size: 2.1rem; }
+      .hero-actions .btn { font-size: .78rem; padding: .9rem 1.1rem; }
+      .section-title { font-size: 1.65rem; }
+
+      /* trust bar: coluna única */
+      .trust-bar-inner { grid-template-columns: 1fr; }
+
+      /* Equipe: card full width */
+      .equipe-grid { grid-template-columns: repeat(3, 96vw); }
+
+      /* Footer awards: coluna */
+      .footer-awards-inner { grid-template-columns: 1fr; }
+
+      /* Nav: logo só ícone + nome, sem tagline */
+      .nav-logo-text { display: none; }
+    }
+
+    /* ── Largura mínima segura para botões inline ──
+       Em telas maiores que 500px, botões voltam a ser inline */
+    @media (min-width: 500px) {
+      .hero-actions,
+      .cta-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-actions .btn,
+      .cta-actions .btn {
+        width: auto;
+        max-width: none;
+        white-space: nowrap;
+      }
+    }
+
+    /* ── Desktop: botões com padding cheio ── */
+    @media (min-width: 768px) {
+      .btn { padding: .9rem 2rem; font-size: .85rem; }
+      .hero-stats {
+        grid-template-columns: repeat(4, auto);
+        max-width: none;
+        gap: 3.5rem;
+      }
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
+  <!-- NAVBAR -->
   <header id="navbar" role="banner">
     <div class="container">
       <nav class="nav-inner" aria-label="Navegação principal">
@@ -1850,17 +1953,12 @@
     </div>
   </header>
 
-  <!-- ============================================================
-       HERO
-  ============================================================ -->
+  <!-- HERO -->
   <section id="hero" aria-label="Apresentação do escritório">
-
-    <!-- Fundo isolado — overflow:hidden no #hero clippa qualquer vazamento -->
     <div class="hero-bg" role="img" aria-label="Escritório de advocacia moderno"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-texture" aria-hidden="true"></div>
 
-    <!-- Conteúdo centralizado -->
     <div class="hero-content-wrap">
       <div class="container">
         <div class="hero-content">
@@ -1882,7 +1980,6 @@
             comprometimento em cada etapa do seu caso.
           </p>
 
-          <!-- BOTÕES — justify-content: center garante centralização -->
           <div class="hero-actions">
             <a href="#contato" class="btn btn-primary">
               <i class="fas fa-calendar-check" aria-hidden="true"></i>
@@ -1915,21 +2012,17 @@
             </div>
           </div>
 
-        </div><!-- /.hero-content -->
-      </div><!-- /.container -->
-    </div><!-- /.hero-content-wrap -->
+        </div>
+      </div>
+    </div>
 
-    <!-- Scroll indicator absoluto dentro do hero -->
     <a href="#trust-bar" class="hero-scroll" aria-label="Rolar para próximo conteúdo">
       <div class="scroll-mouse" aria-hidden="true"></div>
       <span>Explorar</span>
     </a>
-
   </section>
 
-  <!-- ============================================================
-       TRUST BAR
-  ============================================================ -->
+  <!-- TRUST BAR -->
   <div id="trust-bar" role="complementary" aria-label="Credenciais">
     <div class="container">
       <div class="trust-bar-inner">
@@ -1961,9 +2054,7 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       SOBRE
-  ============================================================ -->
+  <!-- SOBRE -->
   <section id="sobre" aria-labelledby="sobre-title">
     <div class="container">
       <div class="sobre-grid">
@@ -1976,7 +2067,7 @@
               alt="Interior do escritório ZG Advocacia"
               loading="lazy"
               width="800"
-              height="520"
+              height="600"
             />
           </div>
           <div class="sobre-card-float">
@@ -1991,11 +2082,10 @@
           <h2 class="section-title" id="sobre-title">
             Tradição, ética e resultados<br />que falam por si só
           </h2>
-          <p class="section-subtitle" style="margin-bottom:2.5rem;">
+          <p class="section-subtitle" style="margin-bottom:2rem;">
             Fundado em 2005, o ZG Advocacia consolidou-se como referência em Goiás
             pela combinação única de profundo conhecimento técnico e atenção
-            genuína a cada cliente. Nossa missão é oferecer soluções jurídicas
-            precisas, acessíveis e eficazes.
+            genuína a cada cliente.
           </p>
 
           <div class="sobre-valores">
@@ -2003,7 +2093,7 @@
               <div class="sobre-valor-icon" aria-hidden="true"><i class="fas fa-balance-scale"></i></div>
               <div>
                 <h4>Ética Inabalável</h4>
-                <p>Atuamos com integridade em cada etapa do processo.</p>
+                <p>Integridade em cada etapa do processo.</p>
               </div>
             </div>
             <div class="sobre-valor">
@@ -2017,19 +2107,19 @@
               <div class="sobre-valor-icon" aria-hidden="true"><i class="fas fa-user-tie"></i></div>
               <div>
                 <h4>Atendimento Exclusivo</h4>
-                <p>Atenção personalizada e dedicada a cada cliente.</p>
+                <p>Atenção personalizada e dedicada.</p>
               </div>
             </div>
             <div class="sobre-valor">
               <div class="sobre-valor-icon" aria-hidden="true"><i class="fas fa-graduation-cap"></i></div>
               <div>
                 <h4>Atualização Contínua</h4>
-                <p>Equipe sempre atualizada com a legislação vigente.</p>
+                <p>Equipe atualizada com a legislação vigente.</p>
               </div>
             </div>
           </div>
 
-          <div style="margin-top:2.5rem;">
+          <div style="margin-top:2rem;">
             <a href="#contato" class="btn btn-navy">
               <i class="fas fa-file-contract" aria-hidden="true"></i>
               Solicite uma análise do seu caso
@@ -2041,9 +2131,7 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       ÁREAS DE ATUAÇÃO
-  ============================================================ -->
+  <!-- ÁREAS -->
   <section id="areas" aria-labelledby="areas-title">
     <div class="container">
       <header class="areas-header fade-up">
@@ -2051,95 +2139,66 @@
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
         <h2 class="section-title" id="areas-title">Nossas áreas de atuação</h2>
         <p class="section-subtitle" style="margin:1rem auto 0;">
-          Atuamos em múltiplas frentes do Direito, com expertise técnica
-          e estratégia para cada situação.
+          Atuamos em múltiplas frentes do Direito, com expertise técnica e estratégia para cada situação.
         </p>
       </header>
 
       <div class="areas-grid">
-
         <article class="area-card fade-up fade-up-delay-1">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
           <h3>Direito Civil</h3>
-          <p>Representação em contratos, responsabilidade civil, família, heranças e
-             questões patrimoniais com precisão e celeridade.</p>
-          <a href="#contato" class="area-card-link">
-            Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
+          <p>Representação em contratos, responsabilidade civil, família, heranças e questões patrimoniais.</p>
+          <a href="#contato" class="area-card-link">Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </article>
 
         <article class="area-card fade-up fade-up-delay-2">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-briefcase"></i></div>
           <h3>Direito Trabalhista</h3>
-          <p>Assessoria completa em rescisões, verbas trabalhistas, assédio moral,
-             acidentes de trabalho e negociações coletivas.</p>
-          <a href="#contato" class="area-card-link">
-            Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
+          <p>Assessoria completa em rescisões, verbas trabalhistas, assédio moral e negociações coletivas.</p>
+          <a href="#contato" class="area-card-link">Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </article>
 
         <article class="area-card fade-up fade-up-delay-3">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-building"></i></div>
           <h3>Direito Empresarial</h3>
-          <p>Constituição e dissolução de empresas, contratos comerciais, fusões,
-             aquisições e proteção do patrimônio corporativo.</p>
-          <a href="#contato" class="area-card-link">
-            Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
+          <p>Constituição e dissolução de empresas, contratos comerciais, fusões e proteção corporativa.</p>
+          <a href="#contato" class="area-card-link">Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </article>
 
         <article class="area-card fade-up fade-up-delay-1">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-landmark"></i></div>
           <h3>Direito Tributário</h3>
-          <p>Planejamento tributário, defesa em autos de infração, recuperação de
-             créditos fiscais e conformidade com obrigações acessórias.</p>
-          <a href="#contato" class="area-card-link">
-            Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
+          <p>Planejamento tributário, defesa em autos de infração e recuperação de créditos fiscais.</p>
+          <a href="#contato" class="area-card-link">Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </article>
 
         <article class="area-card fade-up fade-up-delay-2">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-house"></i></div>
           <h3>Direito Imobiliário</h3>
-          <p>Regularização de imóveis, contratos de compra e venda, locação,
-             usucapião e financiamentos com total segurança jurídica.</p>
-          <a href="#contato" class="area-card-link">
-            Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
+          <p>Regularização de imóveis, contratos de compra e venda, locação e financiamentos.</p>
+          <a href="#contato" class="area-card-link">Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </article>
 
         <article class="area-card fade-up fade-up-delay-3">
           <div class="area-card-icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></div>
           <h3>Direito do Consumidor</h3>
-          <p>Defesa dos seus direitos frente a cobranças indevidas, produtos
-             defeituosos, negativações indevidas e danos morais.</p>
-          <a href="#contato" class="area-card-link">
-            Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
+          <p>Defesa dos seus direitos frente a cobranças indevidas, produtos defeituosos e danos morais.</p>
+          <a href="#contato" class="area-card-link">Consultar especialista <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </article>
-
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       DIFERENCIAIS
-  ============================================================ -->
+  <!-- DIFERENCIAIS -->
   <section id="diferenciais" aria-labelledby="diferenciais-title">
     <div class="diferenciais-bg-shape" aria-hidden="true"></div>
     <div class="container">
       <header class="diferenciais-header fade-up">
         <span class="section-label">Por que nos escolher</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
-        <h2 class="section-title" id="diferenciais-title">
-          O padrão que nos diferencia no mercado
-        </h2>
-        <p class="section-subtitle">
-          Não somos apenas advogados. Somos parceiros estratégicos comprometidos
-          com o seu sucesso jurídico.
-        </p>
+        <h2 class="section-title" id="diferenciais-title">O padrão que nos diferencia no mercado</h2>
+        <p class="section-subtitle">Não somos apenas advogados. Somos parceiros estratégicos comprometidos com o seu sucesso jurídico.</p>
       </header>
-
       <div class="diferenciais-grid">
         <div class="diferencial-item fade-up fade-up-delay-1">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-chart"></i></div>
@@ -2149,77 +2208,63 @@
         <div class="diferencial-item fade-up fade-up-delay-2">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-comments"></i></div>
           <h3>Comunicação Transparente</h3>
-          <p>Mantemos você informado em cada etapa do processo com linguagem clara e acessível.</p>
+          <p>Mantemos você informado em cada etapa com linguagem clara e acessível.</p>
         </div>
         <div class="diferencial-item fade-up fade-up-delay-3">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-clock-rotate-left"></i></div>
           <h3>Agilidade Processual</h3>
-          <p>Utilizamos tecnologia jurídica de ponta para acelerar prazos com eficiência máxima.</p>
+          <p>Tecnologia jurídica de ponta para acelerar prazos com eficiência máxima.</p>
         </div>
         <div class="diferencial-item fade-up fade-up-delay-4">
           <div class="diferencial-icon" aria-hidden="true"><i class="fas fa-lock"></i></div>
           <h3>Sigilo Absoluto</h3>
-          <p>Todas as informações são tratadas com o mais alto nível de confidencialidade.</p>
+          <p>Todas as informações tratadas com o mais alto nível de confidencialidade.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       NÚMEROS
-  ============================================================ -->
+  <!-- NÚMEROS -->
   <section id="numeros" aria-label="Estatísticas do escritório">
     <div class="container">
       <div class="numeros-grid">
         <div class="numero-item fade-up fade-up-delay-1">
-          <div class="numero-value">3.500<span>+</span></div>
+          <div class="numero-value" id="num-casos">3.500<span>+</span></div>
           <div class="numero-label">Casos Atendidos</div>
         </div>
         <div class="numero-item fade-up fade-up-delay-2">
-          <div class="numero-value">20<span>+</span></div>
+          <div class="numero-value" id="num-anos">20<span>+</span></div>
           <div class="numero-label">Anos de Atuação</div>
         </div>
         <div class="numero-item fade-up fade-up-delay-3">
-          <div class="numero-value">98<span>%</span></div>
+          <div class="numero-value" id="num-sat">98<span>%</span></div>
           <div class="numero-label">Satisfação dos Clientes</div>
         </div>
         <div class="numero-item fade-up fade-up-delay-4">
-          <div class="numero-value">12<span>+</span></div>
+          <div class="numero-value" id="num-adv">12<span>+</span></div>
           <div class="numero-label">Advogados Especialistas</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       DEPOIMENTOS
-  ============================================================ -->
+  <!-- DEPOIMENTOS -->
   <section id="depoimentos" aria-labelledby="depoimentos-title">
     <div class="container">
       <header class="depoimentos-header fade-up">
         <span class="section-label">Depoimentos</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
-        <h2 class="section-title" id="depoimentos-title">
-          O que nossos clientes dizem sobre nós
-        </h2>
+        <h2 class="section-title" id="depoimentos-title">O que nossos clientes dizem sobre nós</h2>
       </header>
-
       <div class="depoimentos-grid">
-
         <article class="depoimento-card fade-up fade-up-delay-1">
           <div class="depoimento-quote" aria-hidden="true">"</div>
           <div class="depoimento-stars" aria-label="5 estrelas">
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
             <i class="fas fa-star" aria-hidden="true"></i>
           </div>
-          <p class="depoimento-text">
-            "O escritório superou todas as minhas expectativas. Tive um processo
-            trabalhista que parecia sem saída, e a equipe conduziu tudo com
-            maestria. Resultado excelente em tempo recorde."
-          </p>
+          <p class="depoimento-text">"O escritório superou todas as minhas expectativas. Tive um processo trabalhista que parecia sem saída, e a equipe conduziu tudo com maestria. Resultado excelente em tempo recorde."</p>
           <div class="depoimento-author">
             <div class="depoimento-avatar" aria-hidden="true">MR</div>
             <div class="depoimento-author-info">
@@ -2228,21 +2273,14 @@
             </div>
           </div>
         </article>
-
         <article class="depoimento-card fade-up fade-up-delay-2">
           <div class="depoimento-quote" aria-hidden="true">"</div>
           <div class="depoimento-stars" aria-label="5 estrelas">
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
             <i class="fas fa-star" aria-hidden="true"></i>
           </div>
-          <p class="depoimento-text">
-            "Profissionalismo e atenção que raramente se encontra. Desde o
-            primeiro atendimento fui tratada com respeito e total clareza sobre
-            meu caso. Recomendo sem hesitar."
-          </p>
+          <p class="depoimento-text">"Profissionalismo e atenção que raramente se encontra. Desde o primeiro atendimento fui tratada com respeito e total clareza sobre meu caso. Recomendo sem hesitar."</p>
           <div class="depoimento-author">
             <div class="depoimento-avatar" aria-hidden="true">AC</div>
             <div class="depoimento-author-info">
@@ -2251,21 +2289,14 @@
             </div>
           </div>
         </article>
-
         <article class="depoimento-card fade-up fade-up-delay-3">
           <div class="depoimento-quote" aria-hidden="true">"</div>
           <div class="depoimento-stars" aria-label="5 estrelas">
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
             <i class="fas fa-star" aria-hidden="true"></i>
           </div>
-          <p class="depoimento-text">
-            "Contratei para uma ação empresarial de alto risco. A condução
-            estratégica foi impecável. A empresa foi preservada e o resultado
-            financeiro foi muito além do esperado."
-          </p>
+          <p class="depoimento-text">"Contratei para uma ação empresarial de alto risco. A condução estratégica foi impecável. A empresa foi preservada e o resultado financeiro foi muito além do esperado."</p>
           <div class="depoimento-author">
             <div class="depoimento-avatar" aria-hidden="true">RF</div>
             <div class="depoimento-author-info">
@@ -2274,35 +2305,22 @@
             </div>
           </div>
         </article>
-
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       EQUIPE
-  ============================================================ -->
+  <!-- EQUIPE -->
   <section id="equipe" aria-labelledby="equipe-title">
     <div class="container">
       <header class="equipe-header fade-up">
         <span class="section-label">Nossa Equipe</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
-        <h2 class="section-title" id="equipe-title" style="text-align:center;">
-          Advogados que fazem a diferença
-        </h2>
+        <h2 class="section-title" id="equipe-title" style="text-align:center;">Advogados que fazem a diferença</h2>
       </header>
-
       <div class="equipe-grid">
-
         <article class="equipe-card fade-up fade-up-delay-1">
           <div class="equipe-img-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80"
-              alt="Dr. José Goiano — Sócio fundador"
-              loading="lazy"
-              width="600"
-              height="360"
-            />
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="Dr. José Goiano" loading="lazy" width="600" height="800" />
             <div class="equipe-overlay" aria-hidden="true">
               <div class="equipe-social">
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -2312,20 +2330,12 @@
             </div>
           </div>
           <h3>Dr. José Goiano</h3>
-          <p class="equipe-card-role">Sócio Fundador · Direito Civil & Empresarial</p>
-          <p>Advogado com mais de 20 anos de experiência, especialista em litígios
-             empresariais complexos e referência no estado de Goiás.</p>
+          <p class="equipe-card-role">Sócio Fundador · Civil & Empresarial</p>
+          <p>Advogado com mais de 20 anos de experiência, referência em litígios empresariais complexos no estado de Goiás.</p>
         </article>
-
         <article class="equipe-card fade-up fade-up-delay-2">
           <div class="equipe-img-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
-              alt="Dra. Fernanda Alves — Especialista Trabalhista"
-              loading="lazy"
-              width="600"
-              height="360"
-            />
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Dra. Fernanda Alves" loading="lazy" width="600" height="800" />
             <div class="equipe-overlay" aria-hidden="true">
               <div class="equipe-social">
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -2335,20 +2345,12 @@
             </div>
           </div>
           <h3>Dra. Fernanda Alves</h3>
-          <p class="equipe-card-role">Sócia · Direito Trabalhista & Previdenciário</p>
-          <p>Mestre em Direito do Trabalho, com vasta atuação em mediação coletiva
-             e defesa de empregados e empresas em toda a região Centro-Oeste.</p>
+          <p class="equipe-card-role">Sócia · Trabalhista & Previdenciário</p>
+          <p>Mestre em Direito do Trabalho, com vasta atuação em mediação coletiva na região Centro-Oeste.</p>
         </article>
-
         <article class="equipe-card fade-up fade-up-delay-3">
           <div class="equipe-img-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1556157382-97eda2f9e2bf?auto=format&fit=crop&w=600&q=80"
-              alt="Dr. Ricardo Medeiros — Tributarista"
-              loading="lazy"
-              width="600"
-              height="360"
-            />
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2f9e2bf?auto=format&fit=crop&w=600&q=80" alt="Dr. Ricardo Medeiros" loading="lazy" width="600" height="800" />
             <div class="equipe-overlay" aria-hidden="true">
               <div class="equipe-social">
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -2358,18 +2360,14 @@
             </div>
           </div>
           <h3>Dr. Ricardo Medeiros</h3>
-          <p class="equipe-card-role">Associado Sênior · Direito Tributário & Fiscal</p>
-          <p>Especialista em planejamento tributário e contencioso fiscal com
-             histórico comprovado de recuperação de créditos para empresas.</p>
+          <p class="equipe-card-role">Associado Sênior · Tributário & Fiscal</p>
+          <p>Especialista em planejamento tributário com histórico comprovado de recuperação de créditos.</p>
         </article>
-
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       CTA
-  ============================================================ -->
+  <!-- CTA -->
   <section id="cta" aria-labelledby="cta-title">
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="container">
@@ -2377,11 +2375,11 @@
         <span class="section-label">Dê o próximo passo</span>
         <span class="gold-line gold-line--center" aria-hidden="true"></span>
         <h2 class="section-title" id="cta-title">
-          Seu problema jurídico<br />merece uma solução de alto nível
+          Seu problema jurídico merece<br />uma solução de alto nível
         </h2>
-        <p class="section-subtitle" style="margin:1rem auto 3rem;">
+        <p class="section-subtitle" style="margin:1rem auto 2.5rem;">
           Não espere o problema crescer. Consulte agora um dos nossos especialistas
-          e receba uma análise completa e estratégica do seu caso.
+          e receba uma análise completa do seu caso.
         </p>
         <div class="cta-actions">
           <a href="#contato" class="btn btn-primary">
@@ -2401,51 +2399,31 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       CONTATO
-  ============================================================ -->
+  <!-- CONTATO -->
   <section id="contato" aria-labelledby="contato-title">
     <div class="container">
       <div class="contato-grid">
-
         <div class="contato-info fade-up">
           <span class="section-label">Contato</span>
           <span class="gold-line" aria-hidden="true"></span>
-          <h2 class="section-title" id="contato-title">
-            Estamos prontos<br />para atendê-lo
-          </h2>
-          <p class="section-subtitle">
-            Entre em contato pelos canais abaixo ou preencha o formulário.
-            Retornamos em até 24 horas úteis.
-          </p>
+          <h2 class="section-title" id="contato-title">Estamos prontos<br />para atendê-lo</h2>
+          <p class="section-subtitle">Entre em contato pelos canais abaixo ou preencha o formulário. Retornamos em até 24 horas úteis.</p>
           <div class="contato-items">
             <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></div>
-              <div>
-                <h4>Endereço</h4>
-                <p>Av. T-63, 1234 — Setor Bueno<br />Goiânia — GO, 74215-010</p>
-              </div>
+              <div><h4>Endereço</h4><p>Av. T-63, 1234 — Setor Bueno<br />Goiânia — GO, 74215-010</p></div>
             </div>
             <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-phone"></i></div>
-              <div>
-                <h4>Telefone</h4>
-                <a href="tel:+556299999999">(62) 9999-9999</a>
-              </div>
+              <div><h4>Telefone</h4><a href="tel:+556299999999">(62) 9999-9999</a></div>
             </div>
             <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
-              <div>
-                <h4>E-mail</h4>
-                <a href="mailto:contato@zgadvocacia.com.br">contato@zgadvocacia.com.br</a>
-              </div>
+              <div><h4>E-mail</h4><a href="mailto:contato@zgadvocacia.com.br">contato@zgadvocacia.com.br</a></div>
             </div>
             <div class="contato-item">
               <div class="contato-item-icon" aria-hidden="true"><i class="fas fa-clock"></i></div>
-              <div>
-                <h4>Horário de Atendimento</h4>
-                <p>Segunda a Sexta: 8h às 18h<br />Sábados: 9h às 13h (agendamento)</p>
-              </div>
+              <div><h4>Horário</h4><p>Seg–Sex: 8h às 18h<br />Sábados: 9h às 13h</p></div>
             </div>
           </div>
         </div>
@@ -2453,28 +2431,23 @@
         <div class="fade-up fade-up-delay-2">
           <form class="contato-form" novalidate aria-label="Formulário de contato">
             <h3>Solicite uma análise<br />do seu caso</h3>
-            <p class="contato-form-subtitle">
-              Preencha os dados abaixo e um especialista entrará em contato.
-            </p>
-
+            <p class="contato-form-subtitle">Preencha os dados e um especialista entrará em contato.</p>
             <div class="form-row">
               <div class="form-group">
                 <label for="nome">Nome completo</label>
                 <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name" required />
               </div>
               <div class="form-group">
-                <label for="telefone">Telefone / WhatsApp</label>
+                <label for="telefone">WhatsApp</label>
                 <input type="tel" id="telefone" name="telefone" placeholder="(62) 9 9999-9999" autocomplete="tel" required />
               </div>
             </div>
-
             <div class="form-group">
               <label for="email">E-mail</label>
               <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required />
             </div>
-
             <div class="form-group">
-              <label for="area">Área jurídica de interesse</label>
+              <label for="area">Área jurídica</label>
               <select id="area" name="area" required>
                 <option value="" disabled selected>Selecione uma área</option>
                 <option value="civil">Direito Civil</option>
@@ -2486,52 +2459,34 @@
                 <option value="outro">Outra área</option>
               </select>
             </div>
-
             <div class="form-group">
-              <label for="mensagem">Descreva brevemente seu caso</label>
+              <label for="mensagem">Descreva seu caso</label>
               <textarea id="mensagem" name="mensagem" placeholder="Descreva sua situação para que possamos orientá-lo..." required></textarea>
             </div>
-
             <button type="submit" class="btn btn-primary form-submit">
               <i class="fas fa-paper-plane" aria-hidden="true"></i>
               Solicitar análise do caso
             </button>
-
             <p class="form-privacy">
               <i class="fas fa-shield-halved" aria-hidden="true"></i>
-              Seus dados são protegidos e tratados com total confidencialidade.
+              Seus dados são protegidos com total confidencialidade.
             </p>
           </form>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       RODAPÉ — último elemento do body, sem nada depois
-  ============================================================ -->
+  <!-- RODAPÉ -->
   <footer id="footer" role="contentinfo">
 
     <div class="footer-awards">
       <div class="container">
         <div class="footer-awards-inner">
-          <div class="footer-award">
-            <i class="fas fa-certificate" aria-hidden="true"></i>
-            <span>OAB Goiás — Regularidade Plena</span>
-          </div>
-          <div class="footer-award">
-            <i class="fas fa-award" aria-hidden="true"></i>
-            <span>Melhor Escritório GO 2023</span>
-          </div>
-          <div class="footer-award">
-            <i class="fas fa-shield-halved" aria-hidden="true"></i>
-            <span>LGPD — Conformidade Total</span>
-          </div>
-          <div class="footer-award">
-            <i class="fas fa-star" aria-hidden="true"></i>
-            <span>Avaliação 4.9/5 no Google</span>
-          </div>
+          <div class="footer-award"><i class="fas fa-certificate" aria-hidden="true"></i><span>OAB Goiás — Regularidade Plena</span></div>
+          <div class="footer-award"><i class="fas fa-award" aria-hidden="true"></i><span>Melhor Escritório GO 2023</span></div>
+          <div class="footer-award"><i class="fas fa-shield-halved" aria-hidden="true"></i><span>LGPD — Conformidade Total</span></div>
+          <div class="footer-award"><i class="fas fa-star" aria-hidden="true"></i><span>Avaliação 4.9/5 no Google</span></div>
         </div>
       </div>
     </div>
@@ -2539,22 +2494,15 @@
     <div class="footer-top">
       <div class="container">
         <div class="footer-grid">
-
           <div>
             <div class="footer-brand">
-              <div class="footer-logo-icon" aria-hidden="true">
-                <i class="fas fa-balance-scale"></i>
-              </div>
+              <div class="footer-logo-icon" aria-hidden="true"><i class="fas fa-balance-scale"></i></div>
               <div>
                 <div class="footer-logo-name">ZG Advocacia</div>
                 <div class="footer-logo-tagline">Excelência Jurídica</div>
               </div>
             </div>
-            <p class="footer-about">
-              Escritório de advocacia com mais de 20 anos de tradição em Goiás,
-              reconhecido pela excelência técnica, ética inabalável e comprometimento
-              genuíno com os resultados de cada cliente.
-            </p>
+            <p class="footer-about">Escritório de advocacia com mais de 20 anos de tradição em Goiás, reconhecido pela excelência técnica, ética inabalável e comprometimento genuíno com os resultados de cada cliente.</p>
             <nav class="footer-social" aria-label="Redes sociais">
               <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
               <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
@@ -2562,10 +2510,9 @@
               <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
             </nav>
           </div>
-
           <div class="footer-col">
             <h4>Navegação</h4>
-            <nav class="footer-links" aria-label="Links do rodapé">
+            <nav class="footer-links">
               <a href="#sobre">O Escritório</a>
               <a href="#areas">Áreas de Atuação</a>
               <a href="#diferenciais">Diferenciais</a>
@@ -2574,10 +2521,9 @@
               <a href="#contato">Contato</a>
             </nav>
           </div>
-
           <div class="footer-col">
             <h4>Especialidades</h4>
-            <nav class="footer-links" aria-label="Especialidades">
+            <nav class="footer-links">
               <a href="#areas">Direito Civil</a>
               <a href="#areas">Direito Trabalhista</a>
               <a href="#areas">Direito Empresarial</a>
@@ -2586,29 +2532,15 @@
               <a href="#areas">Direito do Consumidor</a>
             </nav>
           </div>
-
           <div class="footer-col">
             <h4>Contato</h4>
             <address class="footer-contact-list" style="font-style:normal;">
-              <div class="footer-contact-item">
-                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                <span>Av. T-63, 1234 — Setor Bueno<br />Goiânia — GO</span>
-              </div>
-              <div class="footer-contact-item">
-                <i class="fas fa-phone" aria-hidden="true"></i>
-                <a href="tel:+556299999999" style="color:inherit;">(62) 9999-9999</a>
-              </div>
-              <div class="footer-contact-item">
-                <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                <a href="https://wa.me/556299999999" style="color:inherit;" target="_blank" rel="noopener noreferrer">(62) 9 9999-9999</a>
-              </div>
-              <div class="footer-contact-item">
-                <i class="fas fa-envelope" aria-hidden="true"></i>
-                <a href="mailto:contato@zgadvocacia.com.br" style="color:inherit;">contato@zgadvocacia.com.br</a>
-              </div>
+              <div class="footer-contact-item"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Av. T-63, 1234 — Setor Bueno<br />Goiânia — GO</span></div>
+              <div class="footer-contact-item"><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:+556299999999" style="color:inherit;">(62) 9999-9999</a></div>
+              <div class="footer-contact-item"><i class="fab fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/556299999999" style="color:inherit;" target="_blank" rel="noopener noreferrer">(62) 9 9999-9999</a></div>
+              <div class="footer-contact-item"><i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:contato@zgadvocacia.com.br" style="color:inherit;">contato@zgadvocacia.com.br</a></div>
             </address>
           </div>
-
         </div>
       </div>
     </div>
@@ -2627,35 +2559,20 @@
     </div>
 
   </footer>
-  <!-- FIM DO FOOTER — nenhum elemento após este ponto -->
 
-  <!-- ============================================================
-       ELEMENTOS FIXOS (position:fixed — não afetam o fluxo do documento)
-  ============================================================ -->
-  <a
-    href="https://wa.me/556299999999"
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Fale conosco pelo WhatsApp"
-  >
+  <!-- ELEMENTOS FIXOS -->
+  <a href="https://wa.me/556299999999" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">
     <i class="fab fa-whatsapp" aria-hidden="true"></i>
     <span class="wa-label">Fale agora com um especialista</span>
   </a>
 
-  <button
-    id="scrollTop"
-    aria-label="Voltar ao topo"
-    onclick="window.scrollTo({top:0,behavior:'smooth'})"
-  >
+  <button id="scrollTop" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
     <i class="fas fa-chevron-up" aria-hidden="true"></i>
   </button>
 
-  <!-- ============================================================
-       JAVASCRIPT
-  ============================================================ -->
+  <!-- JAVASCRIPT -->
   <script>
-    /* ── Navbar scroll ── */
+    /* ── Navbar ── */
     const navbar    = document.getElementById('navbar');
     const scrollBtn = document.getElementById('scrollTop');
 
@@ -2665,24 +2582,18 @@
       scrollBtn.classList.toggle('visible', y > 500);
     }, { passive: true });
 
-    /* ── Hero: classe loaded para animação inicial ── */
+    /* ── Hero loaded ── */
     window.addEventListener('load', () => {
       document.getElementById('hero').classList.add('loaded');
     });
 
-    /* ── Parallax do hero — CONTROLADO para não vazar ──
-       translateY máximo = 8% da altura do hero,
-       equivalente ao top:-8% / bottom:-8% do .hero-bg,
-       então nunca revela borda branca.
-    ── */
+    /* ── Parallax controlado ── */
     const heroBg = document.querySelector('.hero-bg');
-    if (heroBg && window.innerWidth > 768) {
+    if (heroBg && window.matchMedia('(min-width: 769px)').matches) {
       const heroEl = document.getElementById('hero');
       window.addEventListener('scroll', () => {
-        const y       = window.scrollY;
-        const maxY    = heroEl.offsetHeight;
-        /* limitar a 60px de deslocamento */
-        const shift   = Math.min(y * 0.18, 60);
+        const y     = window.scrollY;
+        const shift = Math.min(y * 0.18, 60);
         heroBg.style.transform = `translateY(${shift}px)`;
       }, { passive: true });
     }
@@ -2695,6 +2606,7 @@
     function openMenu() {
       menu.classList.add('open');
       overlay.classList.add('open');
+      toggle.classList.add('open');
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Fechar menu');
       document.body.style.overflow = 'hidden';
@@ -2703,6 +2615,7 @@
     function closeMenu() {
       menu.classList.remove('open');
       overlay.classList.remove('open');
+      toggle.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Abrir menu');
       document.body.style.overflow = '';
@@ -2713,48 +2626,45 @@
     });
 
     overlay.addEventListener('click', closeMenu);
-    menu.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeMenu));
+    menu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
     });
 
-    /* ── Intersection Observer — Fade Up ── */
+    /* ── Fade Up ── */
     const io = new IntersectionObserver(
       entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
       }),
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
     );
     document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-    /* ── Contadores animados ── */
+    /* ── Contadores ── */
     const countData = [
-      { target: 3500, suffix: '+' },
-      { target: 20,   suffix: '+' },
-      { target: 98,   suffix: '%' },
-      { target: 12,   suffix: '+' },
+      { id: 'num-casos', target: 3500, suffix: '+' },
+      { id: 'num-anos',  target: 20,   suffix: '+' },
+      { id: 'num-sat',   target: 98,   suffix: '%' },
+      { id: 'num-adv',   target: 12,   suffix: '+' },
     ];
 
     const counterIO = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        const items = entry.target.querySelectorAll('.numero-value');
-        items.forEach((el, i) => {
-          const { target, suffix } = countData[i];
-          let current = 0;
+        countData.forEach(({ id, target, suffix }) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          let cur = 0;
           const step = Math.ceil(target / 60);
           const interval = setInterval(() => {
-            current = Math.min(current + step, target);
-            el.innerHTML = current.toLocaleString('pt-BR') + `<span>${suffix}</span>`;
-            if (current >= target) clearInterval(interval);
+            cur = Math.min(cur + step, target);
+            el.innerHTML = cur.toLocaleString('pt-BR') + `<span>${suffix}</span>`;
+            if (cur >= target) clearInterval(interval);
           }, 20);
         });
         counterIO.unobserve(entry.target);
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.35 });
 
     const numSection = document.getElementById('numeros');
     if (numSection) counterIO.observe(numSection);
@@ -2764,7 +2674,7 @@
     if (form) {
       form.addEventListener('submit', e => {
         e.preventDefault();
-        const btn = form.querySelector('.form-submit');
+        const btn  = form.querySelector('.form-submit');
         const orig = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-check"></i> Mensagem enviada com sucesso!';
         btn.style.background = 'linear-gradient(135deg,#4CAF50,#388E3C)';
@@ -2783,7 +2693,7 @@
     if (telInput) {
       telInput.addEventListener('input', e => {
         let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-        if (v.length > 10)      v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+        if      (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
         else if (v.length > 6)  v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4})$/, '($1) $2-$3');
         else if (v.length > 2)  v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
         e.target.value = v;
@@ -2792,4 +2702,4 @@
   </script>
 
 </body>
-              </html>
+      </html>
